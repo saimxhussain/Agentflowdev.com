@@ -1,6 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
+import { useState, useRef, useEffect } from 'react'
 
 const TABS = [
   { id: 'b2b', label: 'B2B Lead Generator', tag: 'Lead Gen', src: 'https://res.cloudinary.com/dgh17nged/video/upload/q_auto/f_auto/v1776609526/B2B_Lead_Generator_ghhfmk.mp4' },
@@ -13,56 +12,87 @@ export default function Hero() {
   const [animating, setAnimating] = useState(false)
   const [displayed, setDisplayed] = useState(0)
 
+  // FIX 1: No auto-switching — only on click
   const switchTab = (idx: number) => {
     if (idx === active) return
     setAnimating(true)
     setTimeout(() => { setDisplayed(idx); setActive(idx); setAnimating(false) }, 220)
   }
 
-  useEffect(() => {
-    const id = setInterval(() => switchTab((active + 1) % TABS.length), 5000)
-    return () => clearInterval(id)
-  }, [active])
-
   return (
     <section style={{
-      paddingTop: 68, minHeight: '100vh', display: 'flex', alignItems: 'center',
-      overflow: 'hidden', position: 'relative',
-      background: 'radial-gradient(ellipse at 20% 50%, rgba(255,77,0,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(120,60,255,0.06) 0%, transparent 50%), #080810',
+      paddingTop: 68,
+      minHeight: '100vh', // FIX 7: full height
+      display: 'flex',
+      alignItems: 'center',
+      overflow: 'hidden',
+      position: 'relative',
+      background: '#080810',
     }}>
-      {/* Orbs */}
-      <div className="orb" style={{ width: 500, height: 500, background: 'rgba(255,77,0,0.12)', top: -100, right: -100, animation: 'orbMove 14s ease-in-out infinite' }} />
-      <div className="orb" style={{ width: 400, height: 400, background: 'rgba(100,60,255,0.08)', bottom: -80, left: -80, animation: 'orbMove2 18s ease-in-out infinite' }} />
+      {/* FIX 7: Animated grid background */}
+      <div style={{
+        position: 'absolute', inset: 0, zIndex: 0,
+        backgroundImage: `
+          linear-gradient(rgba(255,77,0,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,77,0,0.04) 1px, transparent 1px)
+        `,
+        backgroundSize: '60px 60px',
+        maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)',
+      }} />
+
+      {/* Animated gradient blobs */}
+      <div className="orb" style={{ width: 600, height: 600, background: 'rgba(255,77,0,0.13)', top: -150, right: -100, animation: 'orbMove 14s ease-in-out infinite' }} />
+      <div className="orb" style={{ width: 500, height: 500, background: 'rgba(100,60,255,0.09)', bottom: -120, left: -100, animation: 'orbMove2 18s ease-in-out infinite' }} />
+      <div className="orb" style={{ width: 300, height: 300, background: 'rgba(255,77,0,0.07)', top: '50%', left: '40%', animation: 'orbMove 22s ease-in-out infinite reverse' }} />
+
+      {/* Glowing line at top */}
+      <div style={{
+        position: 'absolute', top: 68, left: 0, right: 0, height: 1,
+        background: 'linear-gradient(90deg, transparent, rgba(255,77,0,0.4), transparent)',
+        zIndex: 1,
+      }} />
 
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '80px 24px', width: '100%', position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 60, alignItems: 'center' }}>
+        <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 60, alignItems: 'center' }}>
 
           {/* LEFT */}
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,77,0,0.12)', border: '1px solid rgba(255,77,0,0.25)', padding: '6px 14px', borderRadius: 100, marginBottom: 28, backdropFilter: 'blur(12px)' }}>
-              <span style={{ width: 7, height: 7, background: '#FF4D00', borderRadius: '50%', animation: 'gpulse 2s infinite', flexShrink: 0 }} />
-              <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 12, fontWeight: 600, color: '#FF4D00', letterSpacing: 1 }}>B2B AI Automation Agency</span>
-            </div>
+            {/* FIX 2: Badge removed */}
 
-            <h1 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(38px, 5.5vw, 72px)', lineHeight: 1.0, letterSpacing: -2, color: '#fff', marginBottom: 24 }}>
+            <h1 style={{
+              fontFamily: 'EquitanSans, sans-serif', fontWeight: 900,
+              fontSize: 'clamp(42px, 5.5vw, 76px)',
+              lineHeight: 1.0, letterSpacing: -2, color: '#fff', marginBottom: 24,
+              animation: 'fadeUp 0.6s ease forwards',
+            }}>
               Automate everything.<br />
-              <span style={{ color: '#FF4D00' }}>Dominate</span> your market.
+              <span style={{
+                color: '#FF4D00',
+                textShadow: '0 0 40px rgba(255,77,0,0.5)',
+              }}>Dominate</span> your market.
             </h1>
 
-            <p style={{ fontSize: 17, fontWeight: 400, color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, maxWidth: 480, marginBottom: 36 }}>
+            <p style={{
+              fontSize: 17, fontWeight: 400, color: 'rgba(255,255,255,0.6)',
+              lineHeight: 1.75, maxWidth: 480, marginBottom: 36,
+              animation: 'fadeUp 0.6s 0.1s ease both',
+            }}>
               We build AI systems that replace manual work at scale — lead gen, outreach, social media, voice agents.{' '}
               <strong style={{ color: 'rgba(255,255,255,0.9)', fontWeight: 600 }}>Running 24/7, without your team lifting a finger.</strong>
             </p>
 
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 52 }}>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 52, animation: 'fadeUp 0.6s 0.2s ease both' }}>
               <a href="https://cal.com/saim-hussain-9ekrz6" target="_blank" rel="noreferrer" style={{
                 fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 13, letterSpacing: 1,
-                textTransform: 'uppercase', background: '#FF4D00', color: '#fff', padding: '14px 32px',
+                textTransform: 'uppercase', color: '#fff', padding: '14px 32px',
                 textDecoration: 'none', borderRadius: 10, display: 'inline-flex', alignItems: 'center', gap: 8,
-                transition: 'all 0.2s', boxShadow: '0 4px 24px rgba(255,77,0,0.4)',
+                transition: 'all 0.2s', position: 'relative', overflow: 'hidden',
+                background: 'linear-gradient(135deg, #FF4D00, #ff7733)',
+                boxShadow: '0 4px 24px rgba(255,77,0,0.45), inset 0 1px 0 rgba(255,255,255,0.2)',
               }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#e04400'; el.style.transform = 'translateY(-2px)'; el.style.boxShadow = '0 8px 36px rgba(255,77,0,0.55)' }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#FF4D00'; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 4px 24px rgba(255,77,0,0.4)' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-2px)'; el.style.boxShadow = '0 12px 40px rgba(255,77,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2)' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 4px 24px rgba(255,77,0,0.45), inset 0 1px 0 rgba(255,255,255,0.2)' }}
               >Book a Free Call →</a>
               <a href="#services" style={{
                 fontFamily: 'EquitanSans, sans-serif', fontWeight: 600, fontSize: 13, letterSpacing: 1,
@@ -77,7 +107,7 @@ export default function Hero() {
             </div>
 
             {/* Stats */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 32 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 32, animation: 'fadeUp 0.6s 0.3s ease both' }}>
               {[{ n: '10X', l: 'Faster leads' }, { n: '80%', l: 'Time saved' }, { n: '24/7', l: 'AI agents' }, { n: '6+', l: 'Platforms' }].map((s, i) => (
                 <div key={i} style={{ paddingRight: 16, borderRight: i < 3 ? '1px solid rgba(255,255,255,0.08)' : 'none', paddingLeft: i > 0 ? 16 : 0 }}>
                   <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 28, color: '#FF4D00', lineHeight: 1, letterSpacing: -1 }}>{s.n}</div>
@@ -89,6 +119,7 @@ export default function Hero() {
 
           {/* RIGHT — Video tabs */}
           <div style={{ position: 'relative' }}>
+            {/* FIX 1: Tabs only switch on click, no auto-rotate */}
             <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
               {TABS.map((t, i) => (
                 <button key={t.id} onClick={() => switchTab(i)} style={{
@@ -111,10 +142,10 @@ export default function Hero() {
             {/* Glass browser frame */}
             <div style={{
               borderRadius: 16, overflow: 'hidden',
-              background: 'rgba(255,255,255,0.05)',
+              background: 'rgba(255,255,255,0.04)',
               backdropFilter: 'blur(24px)',
               border: '1px solid rgba(255,255,255,0.12)',
-              boxShadow: '0 24px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)',
+              boxShadow: '0 24px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1), 0 0 0 1px rgba(255,77,0,0.08)',
             }}>
               <div style={{ background: 'rgba(255,255,255,0.05)', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                 <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#ff5f57' }} />
@@ -129,7 +160,7 @@ export default function Hero() {
                   <source src={TABS[displayed].src} type="video/mp4" />
                 </video>
               </div>
-              <div style={{ position: 'absolute', bottom: 16, right: 16, background: 'rgba(255,77,0,0.9)', backdropFilter: 'blur(8px)', color: '#fff', fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: '5px 12px', borderRadius: 20, textTransform: 'uppercase' }}>{TABS[displayed].tag}</div>
+              <div style={{ position: 'absolute', bottom: 60, right: 16, background: 'rgba(255,77,0,0.9)', backdropFilter: 'blur(8px)', color: '#fff', fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: '5px 12px', borderRadius: 20, textTransform: 'uppercase' }}>{TABS[displayed].tag}</div>
             </div>
 
             {/* Trusted */}
@@ -143,7 +174,13 @@ export default function Hero() {
         </div>
       </div>
 
-      <style>{`@keyframes gpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,77,0,.5)}70%{box-shadow:0 0 0 10px rgba(255,77,0,0)}}`}</style>
+      <style>{`
+        @keyframes gpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,77,0,.5)}70%{box-shadow:0 0 0 10px rgba(255,77,0,0)}}
+        @media(max-width:768px){
+          .hero-grid{grid-template-columns:1fr !important; gap:40px !important;}
+          .hero-grid > div:last-child{display:none;}
+        }
+      `}</style>
     </section>
   )
 }
