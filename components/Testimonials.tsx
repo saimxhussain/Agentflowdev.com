@@ -1,6 +1,5 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
-import Reveal from './Reveal'
+import { useState, useRef } from 'react'
 import Image from 'next/image'
 
 const cards = [
@@ -43,77 +42,14 @@ const cards = [
 
 export default function Testimonials() {
   const [active, setActive] = useState(0)
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const isLocked = useRef(false)
-  const lastScrollY = useRef(0)
-  const cooldown = useRef(false)
-
-  useEffect(() => {
-    const section = sectionRef.current
-    if (!section) return
-
-    const handleScroll = () => {
-      if (!section) return
-      const rect = section.getBoundingClientRect()
-      const inView = rect.top <= 0 && rect.bottom >= window.innerHeight
-
-      if (inView && !isLocked.current) {
-        // Lock scroll position
-        isLocked.current = true
-        lastScrollY.current = window.scrollY
-      }
-
-      if (!inView) {
-        isLocked.current = false
-      }
-    }
-
-    const handleWheel = (e: WheelEvent) => {
-      if (!section) return
-      const rect = section.getBoundingClientRect()
-      const inView = rect.top <= 80 && rect.bottom >= window.innerHeight - 80
-
-      if (!inView) return
-
-      // Scrolling down
-      if (e.deltaY > 0) {
-        if (active < cards.length - 1) {
-          e.preventDefault()
-          if (cooldown.current) return
-          cooldown.current = true
-          setActive(i => i + 1)
-          setTimeout(() => { cooldown.current = false }, 600)
-        }
-        // Last card — let scroll through naturally
-      }
-
-      // Scrolling up
-      if (e.deltaY < 0) {
-        if (active > 0) {
-          e.preventDefault()
-          if (cooldown.current) return
-          cooldown.current = true
-          setActive(i => i - 1)
-          setTimeout(() => { cooldown.current = false }, 600)
-        }
-        // First card — let scroll through naturally
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('wheel', handleWheel, { passive: false })
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('wheel', handleWheel)
-    }
-  }, [active])
+  const card = cards[active]
+  const goTo = (i: number) => setActive(i)
+  const prev = () => setActive(i => Math.max(0, i - 1))
+  const next = () => setActive(i => Math.min(cards.length - 1, i + 1))
 
   // Touch support
   const touchStartY = useRef(0)
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartY.current = e.touches[0].clientY
-  }
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartY.current = e.touches[0].clientY }
   const handleTouchEnd = (e: React.TouchEvent) => {
     const delta = touchStartY.current - e.changedTouches[0].clientY
     if (Math.abs(delta) < 40) return
@@ -121,206 +57,157 @@ export default function Testimonials() {
     if (delta < 0 && active > 0) setActive(i => i - 1)
   }
 
-  const card = cards[active]
-
-  const goTo = (i: number) => setActive(i)
-  const prev = () => setActive(i => Math.max(0, i - 1))
-  const next = () => setActive(i => Math.min(cards.length - 1, i + 1))
-
   return (
+    // FIX 4: No sticky scroll trap, no min-height:100vh spacer = no white gap
+    // Replaced with clean glassmorphism card layout
     <section
-      ref={sectionRef}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       style={{
         padding: '120px 0',
-        background: '#fafafa',
-        borderBottom: '1px solid #f0f0f0',
-        overflow: 'hidden',
-        // Tall enough so it's "in view" for a while during scroll
-        minHeight: '100vh',
+        background: '#080810',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
         position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      {/* Sticky inner container — sticks while user scrolls through cards */}
-      <div style={{
-        position: 'sticky',
-        top: 0,
-        paddingTop: 60,
-        paddingBottom: 60,
-        background: '#fafafa',
-        zIndex: 10,
-      }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px' }}>
+      {/* Subtle background orbs */}
+      <div className="orb" style={{ width: 500, height: 500, background: 'rgba(255,77,0,0.07)', top: -100, right: -100, animation: 'orbMove 20s ease-in-out infinite' }} />
+      <div className="orb" style={{ width: 400, height: 400, background: 'rgba(100,60,255,0.05)', bottom: -80, left: -80, animation: 'orbMove2 24s ease-in-out infinite' }} />
 
-          {/* Header */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-            <span style={{ width: 24, height: 3, background: '#FF4D00', borderRadius: 2 }} />
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#FF4D00' }}>Client Results</span>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', position: 'relative', zIndex: 1 }}>
+
+        {/* Header */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
+          <span style={{ width: 24, height: 3, background: '#FF4D00', borderRadius: 2 }} />
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#FF4D00' }}>Client Results</span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 56, flexWrap: 'wrap', gap: 20 }}>
+          <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#fff' }}>
+            Real clients.<br /><span style={{ color: '#FF4D00' }}>Real results.</span>
+          </h2>
+
+          {/* Arrows + counter */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <button onClick={prev} disabled={active === 0} style={{
+              width: 52, height: 52, borderRadius: 12,
+              border: '1px solid rgba(255,255,255,0.12)',
+              background: active === 0 ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.07)',
+              backdropFilter: 'blur(12px)',
+              cursor: active === 0 ? 'not-allowed' : 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'all 0.2s', color: active === 0 ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.7)',
+            }}
+              onMouseEnter={e => { if (active > 0) { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#FF4D00'; el.style.color = '#FF4D00' } }}
+              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.12)'; el.style.color = active === 0 ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.7)' }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+            </button>
+            <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.3)', minWidth: 40, textAlign: 'center' }}>{active + 1} / {cards.length}</span>
+            <button onClick={next} disabled={active === cards.length - 1} style={{
+              width: 52, height: 52, borderRadius: 12,
+              border: '1px solid rgba(255,255,255,0.12)',
+              background: active === cards.length - 1 ? 'rgba(255,255,255,0.03)' : 'rgba(255,255,255,0.07)',
+              backdropFilter: 'blur(12px)',
+              cursor: active === cards.length - 1 ? 'not-allowed' : 'pointer',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'all 0.2s', color: active === cards.length - 1 ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.7)',
+            }}
+              onMouseEnter={e => { if (active < cards.length - 1) { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#FF4D00'; el.style.color = '#FF4D00' } }}
+              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,255,255,0.12)'; el.style.color = active === cards.length - 1 ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.7)' }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+            </button>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48 }}>
-            <h2 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 1.05, letterSpacing: -2, color: '#0a0a0a' }}>
-              Real clients.<br /><span style={{ color: '#FF4D00' }}>Real results.</span>
-            </h2>
+        </div>
 
-            {/* Right side: scroll hint + arrows */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 16 }}>
-              {/* Scroll hint */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, opacity: 0.5 }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a4 4 0 0 1 4 4v8a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><line x1="12" y1="18" x2="12" y2="22"/>
-                </svg>
-                <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 11, fontWeight: 500, color: '#999', letterSpacing: 0.5 }}>Scroll to navigate</span>
-              </div>
-              {/* Arrows */}
-              <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-                <button onClick={prev} disabled={active === 0} style={{
-                  width: 52, height: 52, borderRadius: 12, border: '1.5px solid #e0e0e0',
-                  background: active === 0 ? '#f5f5f5' : '#fff',
-                  cursor: active === 0 ? 'not-allowed' : 'pointer',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  transition: 'all 0.2s', color: active === 0 ? '#ccc' : '#0a0a0a',
-                  boxShadow: active === 0 ? 'none' : '0 2px 8px rgba(0,0,0,0.08)',
-                }}
-                  onMouseEnter={e => { if (active > 0) { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#FF4D00'; el.style.color = '#FF4D00' } }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#e0e0e0'; el.style.color = active === 0 ? '#ccc' : '#0a0a0a' }}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
-                </button>
-                <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 13, fontWeight: 600, color: '#aaa', minWidth: 40, textAlign: 'center' }}>{active + 1} / {cards.length}</span>
-                <button onClick={next} disabled={active === cards.length - 1} style={{
-                  width: 52, height: 52, borderRadius: 12, border: '1.5px solid #e0e0e0',
-                  background: active === cards.length - 1 ? '#f5f5f5' : '#fff',
-                  cursor: active === cards.length - 1 ? 'not-allowed' : 'pointer',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  transition: 'all 0.2s', color: active === cards.length - 1 ? '#ccc' : '#0a0a0a',
-                  boxShadow: active === cards.length - 1 ? 'none' : '0 2px 8px rgba(0,0,0,0.08)',
-                }}
-                  onMouseEnter={e => { if (active < cards.length - 1) { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#FF4D00'; el.style.color = '#FF4D00' } }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#e0e0e0'; el.style.color = active === cards.length - 1 ? '#ccc' : '#0a0a0a' }}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
-                </button>
-              </div>
-            </div>
-          </div>
+        {/* MAIN GLASS CARD */}
+        <div key={active} style={{
+          background: 'rgba(255,255,255,0.04)',
+          backdropFilter: 'blur(40px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+          border: '1px solid rgba(255,255,255,0.10)',
+          borderRadius: 24,
+          overflow: 'hidden',
+          boxShadow: '0 32px 80px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)',
+          animation: 'fadeUp 0.4s ease forwards',
+        }}>
+          <div className="testimonial-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }}>
 
-          {/* SPLIT LAYOUT */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'start' }}>
-
-            {/* LEFT — Image stack */}
-            <div style={{ position: 'relative' }}>
-              <div style={{ position: 'relative', width: '100%', paddingBottom: '100%' }}>
-                {cards.map((c, i) => {
-                  const offset = i - active
-                  const absOffset = Math.abs(offset)
-                  if (absOffset > 2) return null
-                  const x = offset * 24
-                  const y = offset * 12
-                  const rotate = offset * 4
-                  const scale = absOffset === 0 ? 1 : absOffset === 1 ? 0.93 : 0.86
-                  const zIndex = cards.length - absOffset
-                  const opacity = absOffset === 2 ? 0.5 : 1
-                  return (
-                    <div
-                      key={i}
-                      onClick={() => goTo(i)}
-                      style={{
-                        position: 'absolute', inset: 0,
-                        transform: `translate(${x}px, ${y}px) rotate(${rotate}deg) scale(${scale})`,
-                        zIndex, opacity,
-                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                        cursor: offset === 0 ? 'default' : 'pointer',
-                        borderRadius: 20, overflow: 'hidden',
-                        boxShadow: i === active
-                          ? '0 24px 64px rgba(0,0,0,0.18), 0 0 0 2px rgba(255,77,0,0.2)'
-                          : '0 8px 24px rgba(0,0,0,0.1)',
-                      }}
-                    >
-                      <Image src={c.src} alt={c.alt} fill style={{ objectFit: 'cover' }} sizes="(max-width: 1280px) 50vw, 580px" />
-                    </div>
-                  )
-                })}
-              </div>
-
-              {/* Progress dots */}
-              <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 28 }}>
-                {cards.map((_, i) => (
-                  <button key={i} onClick={() => goTo(i)} style={{
-                    width: i === active ? 28 : 8, height: 8, borderRadius: 4,
-                    border: 'none', padding: 0,
-                    background: i === active ? '#FF4D00' : '#e0e0e0',
-                    cursor: 'pointer', transition: 'all 0.3s ease',
-                  }} />
-                ))}
-              </div>
+            {/* LEFT — Image */}
+            <div style={{ position: 'relative', minHeight: 420, overflow: 'hidden', borderRight: '1px solid rgba(255,255,255,0.08)' }}>
+              <Image src={card.src} alt={card.alt} fill style={{ objectFit: 'cover', opacity: 0.9 }} sizes="(max-width: 768px) 100vw, 50vw" />
+              {/* Gradient overlay */}
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, transparent 60%, rgba(8,8,16,0.4))' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(8,8,16,0.6) 0%, transparent 50%)' }} />
+              {/* Card label */}
+              <div style={{ position: 'absolute', bottom: 20, left: 20, background: 'rgba(255,77,0,0.9)', backdropFilter: 'blur(8px)', color: '#fff', fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: '6px 14px', borderRadius: 20, textTransform: 'uppercase' }}>{card.alt}</div>
             </div>
 
-            {/* RIGHT — Problem / Solution / Review */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            {/* RIGHT — Details */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
 
               {/* Problem */}
-              <div style={{
-                background: '#fff', borderRadius: '16px 16px 4px 4px',
-                padding: '32px 32px', border: '1.5px solid #f0f0f0', borderBottom: 'none',
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(239,68,68,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <div style={{ padding: '32px 32px', borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(239,68,68,0.03)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+                  <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(239,68,68,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
                     </svg>
                   </div>
                   <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: '#ef4444' }}>Problem</span>
                 </div>
-                <p key={`p-${active}`} style={{ fontSize: 15, fontWeight: 400, color: '#555', lineHeight: 1.8, margin: 0, animation: 'fadeUp 0.4s ease forwards' }}>
-                  {card.problem}
-                </p>
+                <p style={{ fontSize: 14, fontWeight: 400, color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, margin: 0 }}>{card.problem}</p>
               </div>
 
               {/* Solution */}
-              <div style={{ background: '#0a0a0a', padding: '32px 32px', border: '1.5px solid #0a0a0a', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', top: -30, right: -30, width: 140, height: 140, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,77,0,0.18) 0%, transparent 70%)', pointerEvents: 'none' }} />
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(255,77,0,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <div style={{ padding: '32px 32px', borderBottom: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden', background: 'rgba(255,77,0,0.04)' }}>
+                <div style={{ position: 'absolute', top: -30, right: -30, width: 120, height: 120, borderRadius: '50%', background: 'radial-gradient(circle, rgba(255,77,0,0.2) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+                  <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(255,77,0,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
                   <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: '#FF4D00' }}>Solution</span>
                 </div>
-                <p key={`s-${active}`} style={{ fontSize: 15, fontWeight: 400, color: '#aaa', lineHeight: 1.8, margin: 0, position: 'relative', zIndex: 1, animation: 'fadeUp 0.4s ease forwards' }}>
-                  {card.solution}
-                </p>
+                <p style={{ fontSize: 14, fontWeight: 400, color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, margin: 0, position: 'relative', zIndex: 1 }}>{card.solution}</p>
               </div>
 
               {/* Review */}
-              <div style={{ background: '#fff9f6', borderRadius: '4px 4px 16px 16px', padding: '32px 32px', border: '1.5px solid rgba(255,77,0,0.12)', borderTop: 'none' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(255,77,0,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="#FF4D00">
+              <div style={{ padding: '32px 32px', flex: 1, background: 'rgba(255,255,255,0.02)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+                  <div style={{ width: 28, height: 28, borderRadius: 8, background: 'rgba(255,77,0,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="#FF4D00">
                       <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575z" />
                     </svg>
                   </div>
                   <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2.5, textTransform: 'uppercase', color: '#FF4D00' }}>Client Review</span>
                 </div>
-                <p key={`r-${active}`} style={{ fontSize: 14, fontWeight: 400, color: '#666', lineHeight: 1.85, fontStyle: 'italic', margin: 0, animation: 'fadeUp 0.4s ease forwards' }}>
-                  {card.review}
-                </p>
+                <p style={{ fontSize: 14, fontWeight: 400, color: 'rgba(255,255,255,0.45)', lineHeight: 1.85, fontStyle: 'italic', margin: 0 }}>{card.review}</p>
               </div>
-
             </div>
           </div>
+        </div>
 
+        {/* Dots */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 28 }}>
+          {cards.map((_, i) => (
+            <button key={i} onClick={() => goTo(i)} style={{
+              width: i === active ? 28 : 8, height: 8, borderRadius: 4,
+              border: 'none', padding: 0,
+              background: i === active ? '#FF4D00' : 'rgba(255,255,255,0.12)',
+              cursor: 'pointer', transition: 'all 0.3s ease',
+            }} />
+          ))}
         </div>
       </div>
 
-      {/* Invisible scroll spacer — each "step" = 100vh so browser has room to scroll */}
-      <div style={{ height: `${(cards.length - 1) * 100}vh`, pointerEvents: 'none' }} />
-
       <style>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(10px); }
-          to   { opacity: 1; transform: translateY(0); }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+        @media(max-width:768px){
+          .testimonial-grid{grid-template-columns:1fr !important;}
+          .testimonial-grid > div:first-child{min-height:240px !important;}
         }
       `}</style>
     </section>
