@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-Thin.otf') format('opentype'); font-weight:100; }
+@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-ExtraLight.otf') format('opentype'); font-weight:200; }
+@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-Light.otf') format('opentype'); font-weight:300; }
+@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-Regular.otf') format('opentype'); font-weight:400; }
+@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-SemiBold.otf') format('opentype'); font-weight:600; }
+@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-Bold.otf') format('opentype'); font-weight:700; }
+@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-Black.otf') format('opentype'); font-weight:900; }
+@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-BlackItalic.otf') format('opentype'); font-weight:900; font-style:italic; }
+@font-face { font-family:'EquitanSans'; src:url('/fonts/EquitanSans-BoldItalic.otf') format('opentype'); font-weight:700; font-style:italic; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #ffffff;
+  color: #0a0a0a;
+  font-family: 'EquitanSans', sans-serif;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+/* Marquee / Ticker */
+.ticker-inner { display: inline-flex; animation: ticker 24s linear infinite; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.on { opacity: 1; transform: translateY(0); }
+
+/* Glow pulse */
+@keyframes gpulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,77,0,.4); } 50% { box-shadow: 0 0 0 8px rgba(255,77,0,0); } }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #f5f5f5; }
+::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #FF4D00; }
+::selection { background: #FF4D00; color: #fff; }
+
+/* Hide scrollbar for testimonials row */
+.hide-scroll::-webkit-scrollbar { display: none; }
+.hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
