@@ -8,10 +8,13 @@ import Testimonials from '@/components/Testimonials'
 import CaseStudies from '@/components/CaseStudies'
 import Services from '@/components/Services'
 import Pricing from '@/components/Pricing'
+import ROICalculator from '@/components/ROICalculator'
+import FAQ from '@/components/FAQ'
 import CTA from '@/components/CTA'
 import Footer from '@/components/Footer'
 import FloatingCTA from '@/components/FloatingCTA'
 import PageLoader from '@/components/PageLoader'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 export default function Home() {
   return (
@@ -20,6 +23,7 @@ export default function Home() {
       <Cursor />
       <Navbar />
       <FloatingCTA />
+      <WhatsAppButton />
       <main>
         <Hero />
         <Ticker />
@@ -29,6 +33,8 @@ export default function Home() {
         <CaseStudies />
         <Services />
         <Pricing />
+        <ROICalculator />
+        <FAQ />
         <CTA />
       </main>
       <Footer />
