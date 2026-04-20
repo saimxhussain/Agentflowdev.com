@@ -69,7 +69,7 @@ function CaseCard({ c, index }: { c: typeof cases[0], index: number }) {
         </div>
         {/* Before */}
         <div style={{ padding: '36px 32px', borderRight: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: 24 }}>Before Scattoo</div>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', marginBottom: 24 }}>Before AgentFlow</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {c.before.map((b, j) => (
               <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
@@ -81,7 +81,7 @@ function CaseCard({ c, index }: { c: typeof cases[0], index: number }) {
         </div>
         {/* After */}
         <div style={{ padding: '36px 32px', background: 'rgba(255,77,0,0.04)' }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#FF4D00', marginBottom: 24 }}>After Scattoo</div>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#FF4D00', marginBottom: 24 }}>After AgentFlow</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {c.after.map((a, j) => (
               <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, borderBottom: '1px solid rgba(255,77,0,0.08)' }}>
