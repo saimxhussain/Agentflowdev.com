@@ -16,7 +16,7 @@ export default function WhatsAppButton() {
   // Don't render on touch devices (mobile has native WA app, no need for cursor)
   // But DO render the button — it's useful on all devices
   const phone = '923122976653' // ← replace with your actual WhatsApp number
-  const message = encodeURIComponent("Hi Saim! I came across Scattoo and I'm interested in automating my business. Can we chat?")
+  const message = encodeURIComponent("Hi Saim! I came across AgentFlow and I'm interested in automating my business. Can we chat?")
   const href = `https://wa.me/${phone}?text=${message}`
 
   return (
