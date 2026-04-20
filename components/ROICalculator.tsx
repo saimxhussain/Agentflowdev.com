@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Reveal from './Reveal'
 
 const COUNTRIES = [
@@ -64,8 +64,17 @@ export default function ROICalculator() {
   const [country,  setCountry]  = useState(COUNTRIES[0])
   const [rate,     setRate]     = useState(COUNTRIES[0].defaultRate)
   const [selected, setSelected] = useState<string[]>(['leadgen', 'outreach'])
-  const [showModal, setShowModal] = useState(true)
+  const [showModal, setShowModal] = useState(false)
   const [search,   setSearch]   = useState('')
+
+  useEffect(() => {
+    const saved = localStorage.getItem('agentflow_country')
+    if (saved) {
+      const found = COUNTRIES.find(c => c.code === saved)
+      if (found) { setCountry(found); setRate(found.defaultRate); return }
+    }
+    setShowModal(true)
+  }, [])
 
   // All math in local currency — no conversion needed
   const weekly     = hours * rate
@@ -81,6 +90,7 @@ export default function ROICalculator() {
     setCountry(c)
     setRate(c.defaultRate)
     setShowModal(false)
+    localStorage.setItem("agentflow_country", c.code)
   }
 
   const filtered = COUNTRIES.filter(c =>
