@@ -20,7 +20,7 @@ export default function PageLoader() {
     top: 0,
     bottom: 0,
     width: '50%',
-    background: '#080810',
+    background: 'var(--loader-bg)',
     transition: 'transform 0.65s cubic-bezier(0.76, 0, 0.24, 1)',
     zIndex: 9999,
   }
