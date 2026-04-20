@@ -20,9 +20,9 @@ export default function Footer() {
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '64px 24px 48px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 40, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
         <div>
           <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', marginBottom: 16 }}>
-            <Image src="/logo.png" alt="Scattoo" width={36} height={36} style={{ borderRadius: 8 }} />
+            <Image src="/logo.png" alt="AgentFlow" width={36} height={36} style={{ borderRadius: 8 }} />
             <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 18, letterSpacing: 3, color: '#fff' }}>
-              SCATTOO<span style={{ color: '#FF4D00' }}>.</span>
+              AGENTFLOW<span style={{ color: '#FF4D00' }}>.</span>
             </span>
           </a>
           <p style={{ fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,0.4)', lineHeight: 1.75, maxWidth: 260, marginBottom: 28 }}>
@@ -65,7 +65,7 @@ export default function Footer() {
 
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
         {/* FIX: updated copyright year */}
-        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)' }}>© 2026 Scattoo. All rights reserved.</span>
+        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)' }}>© 2026 AgentFlow. All rights reserved.</span>
         <div style={{ display: 'flex', gap: 28, alignItems: 'center', flexWrap: 'wrap' }}>
           <Link href="/privacy-policy" style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', textDecoration: 'none', transition: 'color 0.2s' }}
             onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = '#FF4D00'}
@@ -76,7 +76,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* FIX 6: Attractive animated SCATTOO with glow + gradient stroke */}
+      {/* FIX 6: Attractive animated AGENTFLOW with glow + gradient stroke */}
       <div style={{ overflow: 'hidden', paddingTop: 24, paddingBottom: 0, position: 'relative' }}>
         {/* Glow beneath text */}
         <div style={{
@@ -102,7 +102,7 @@ export default function Footer() {
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
           animation: 'brandGlow 4s ease-in-out infinite alternate',
-        }}>SCATTOO</div>
+        }}>AGENTFLOW</div>
       </div>
 
       <style>{`
