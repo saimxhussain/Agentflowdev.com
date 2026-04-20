@@ -51,7 +51,7 @@ export default function PageLoader() {
         textTransform: 'uppercase',
         animation: 'loaderFade 0.8s ease forwards',
       }}>
-        SCATTOO<span style={{ color: '#FF4D00' }}>.</span>
+        AGENTFLOW<span style={{ color: '#FF4D00' }}>.</span>
       </div>
 
       <style>{`
