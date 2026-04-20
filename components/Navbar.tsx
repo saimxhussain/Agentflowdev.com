@@ -49,9 +49,9 @@ export default function Navbar() {
 
         <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-            <Image src="/logo.png" alt="Scattoo" width={36} height={36} style={{ borderRadius: 8 }} />
+            <Image src="/logo.png" alt="AgentFlow" width={36} height={36} style={{ borderRadius: 8 }} />
             <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 20, letterSpacing: 2, color: '#fff' }}>
-              SCATTOO<span style={{ color: '#FF4D00' }}>.</span>
+              AGENTFLOW<span style={{ color: '#FF4D00' }}>.</span>
             </span>
           </a>
 
