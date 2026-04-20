@@ -75,7 +75,7 @@ export default function About() {
         <Reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
             <span style={{ width: 24, height: 3, background: '#FF4D00', borderRadius: 2 }} />
-            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#FF4D00' }}>About Scattoo</span>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: '#FF4D00' }}>About AgentFlow</span>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 60, alignItems: 'start' }}>
             <div>
@@ -83,7 +83,7 @@ export default function About() {
                 Your business,<br /><span style={{ color: '#FF4D00' }}>on autopilot.</span>
               </h2>
               <p style={{ fontSize: 16, fontWeight: 400, color: 'rgba(255,255,255,0.55)', lineHeight: 1.85, marginBottom: 20 }}>
-                Scattoo is a <strong style={{ color: 'rgba(255,255,255,0.9)' }}>B2B AI automation agency</strong> that builds intelligent systems replacing manual work at scale. Lead generation, outreach, social media, voice AI — we deploy pipelines that run 24/7 without human intervention.
+                AgentFlow is a <strong style={{ color: 'rgba(255,255,255,0.9)' }}>B2B AI automation agency</strong> that builds intelligent systems replacing manual work at scale. Lead generation, outreach, social media, voice AI — we deploy pipelines that run 24/7 without human intervention.
               </p>
               <p style={{ fontSize: 16, fontWeight: 400, color: 'rgba(255,255,255,0.55)', lineHeight: 1.85 }}>
                 Our edge: combining <strong style={{ color: 'rgba(255,255,255,0.9)' }}>deep technical skill</strong> in n8n, GPT-4o, and custom AI agents with sharp business strategy. If you&apos;re spending hours on repetitive work, we&apos;ve already built a system that eliminates it.
