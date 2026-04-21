@@ -82,8 +82,8 @@ export default function Footer() {
         <div
           className="footer-wordmark"
           style={{
-            fontSize: 'clamp(40px, 13vw, 185px)',
-            letterSpacing: '-1px',
+            fontSize: 'clamp(32px, 10.5vw, 150px)',
+            letterSpacing: '0px',
             lineHeight: 0.85,
             whiteSpace: 'nowrap',
             display: 'block',
