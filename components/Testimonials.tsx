@@ -65,7 +65,7 @@ export default function Testimonials() {
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
             </button>
-            <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 14, fontWeight: 600, color: 'var(--text-5)', minWidth: 44, textAlign: 'center' }}>{active + 1} / {cards.length}</span>
+            <span style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontSize: 14, fontWeight: 600, color: 'var(--text-5)', minWidth: 44, textAlign: 'center' }}>{cards.length - active} / {cards.length}</span>
             <button onClick={next} disabled={active === cards.length - 1} style={btnStyle(active === cards.length - 1)}
               onMouseEnter={e => { if (active < cards.length - 1) { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--orange)'; el.style.color = 'var(--orange)' } }}
               onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border-2)'; el.style.color = active === cards.length - 1 ? 'var(--text-6)' : 'var(--text-3)' }}
