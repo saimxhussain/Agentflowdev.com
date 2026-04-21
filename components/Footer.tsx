@@ -77,9 +77,9 @@ export default function Footer() {
       </div>
 
       {/* AGENTFLOW fill animation */}
-      <div style={{ overflow: 'hidden', paddingTop: 16, position: 'relative' }}>
+      <div style={{ overflow: 'hidden', paddingTop: 16, paddingBottom: 0, position: 'relative', width: '100%', maxWidth: '100vw' }}>
         <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '70%', height: 80, background: 'radial-gradient(ellipse, rgba(131,199,50,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div className="footer-wordmark">AGENTFLOW</div>
+        <div className="footer-wordmark" style={{ fontSize: 'clamp(48px, 14vw, 200px)', letterSpacing: '-2px', overflowX: 'hidden', paddingBottom: 0, lineHeight: 0.82 }}>AGENTFLOW</div>
       </div>
     </footer>
   )
