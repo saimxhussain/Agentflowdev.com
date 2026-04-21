@@ -12,32 +12,28 @@ function LiquidText() {
   return (
     <div style={{
       width: '100%',
-      height: 'clamp(100px, 18vw, 240px)',
+      overflow: 'hidden',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      padding: '8px 0',
       pointerEvents: 'none',
-      position: 'relative',
     }}>
       <span style={{
         fontFamily: 'var(--font-display), MonumentExtended, sans-serif',
         fontWeight: 800,
-        fontSize: 'clamp(52px, 13vw, 172px)',
+        fontSize: 'clamp(48px, 9vw, 148px)',
         letterSpacing: '-0.03em',
         lineHeight: 1,
+        whiteSpace: 'nowrap',
         display: 'block',
-        color: 'transparent',
-        WebkitTextStroke: '1.5px rgba(255,255,255,0.18)',
-        textShadow: `
-          0 0 80px rgba(131,199,50,0.25),
-          0 2px 0 rgba(255,255,255,0.06),
-          inset 0 0 40px rgba(131,199,50,0.1)
-        `,
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(131,199,50,0.08) 40%, rgba(255,255,255,0.04) 100%)',
+        maxWidth: '100%',
+        WebkitTextStroke: '1.5px rgba(255,255,255,0.22)',
+        background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(131,199,50,0.10) 45%, rgba(255,255,255,0.05) 100%)',
         WebkitBackgroundClip: 'text',
         backgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
-        filter: 'drop-shadow(0 0 32px rgba(131,199,50,0.18))',
+        filter: 'drop-shadow(0 0 24px rgba(131,199,50,0.20))',
         userSelect: 'none',
       }}>
         AgentFlow
@@ -75,7 +71,7 @@ export default function Hero() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }} />
-      {/* Subtle dark vignette */}
+      {/* Subtle dark vignette so text stays readable */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,
         background: 'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(31,48,55,0.45) 0%, rgba(31,48,55,0.75) 100%)',
@@ -95,7 +91,7 @@ export default function Hero() {
         boxShadow: '0 8px 48px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.15)',
       }}>
 
-        {/* Top row */}
+        {/* Top row: tagline left, CTA right */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8, flexWrap: 'wrap', gap: 16 }}>
           <p style={{ fontFamily: 'var(--font-body),Degular,sans-serif', fontSize: 15, fontWeight: 500, color: 'rgba(245,240,234,0.7)', margin: 0, maxWidth: 480, lineHeight: 1.6 }}>
             The leading AI automation agency —<br />built for the future of intelligent workflows.
@@ -117,7 +113,7 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Transparent glass text */}
+        {/* WebGL liquid text */}
         <LiquidText />
 
         {/* Subtitle */}
@@ -127,7 +123,7 @@ export default function Hero() {
           <br />AI systems running 24/7, without your team lifting a finger.
         </p>
 
-        {/* Pill buttons */}
+        {/* 3 pill buttons */}
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 44 }}>
           {[
             { label: 'Book a Free Consultation', href: 'https://cal.com/saim-hussain-9ekrz6', primary: true },
