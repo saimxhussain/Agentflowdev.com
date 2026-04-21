@@ -29,9 +29,13 @@ export default function Hero() {
       background: 'var(--bg)',
       paddingTop: 68,
     }}>
-      <video autoPlay muted loop playsInline style={{ position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',zIndex:0,opacity:0.35 }}>
-        <source src="/images/automate.mp4" type="video/mp4" />
-      </video>
+      <div style={{
+        position:'absolute',inset:0,zIndex:0,
+        backgroundImage:'url(/images/hero-bg.png)',
+        backgroundSize:'cover',
+        backgroundPosition:'center',
+        opacity:0.4,
+      }} />
       <div style={{ position:'absolute',inset:0,zIndex:1,background:'linear-gradient(135deg, rgba(31,48,55,0.85) 0%, rgba(31,48,55,0.55) 50%, rgba(131,199,50,0.18) 100%)' }} />
       <div style={{ position:'absolute',inset:0,zIndex:1,backgroundImage:`linear-gradient(var(--grid-line) 1px, transparent 1px),linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)`,backgroundSize:'60px 60px',maskImage:'radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%)',WebkitMaskImage:'radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%)' }} />
 
