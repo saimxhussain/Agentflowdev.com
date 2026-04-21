@@ -17,7 +17,7 @@ const NAV_COLS = [
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: '1px solid var(--section-line)' }}>
+    <footer style={{ borderTop: '1px solid var(--section-line)', overflow: 'hidden', width: '100%' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '64px 24px 48px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 40, borderBottom: '1px solid var(--section-line)' }}>
         <div>
           <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', marginBottom: 16 }}>
@@ -76,10 +76,23 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* AGENTFLOW fill animation */}
-      <div style={{ overflow: 'hidden', paddingTop: 16, paddingBottom: 0, position: 'relative', width: '100%', maxWidth: '100vw' }}>
-        <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '70%', height: 80, background: 'radial-gradient(ellipse, rgba(131,199,50,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div className="footer-wordmark" style={{ fontSize: 'clamp(48px, 14vw, 200px)', letterSpacing: '-2px', overflowX: 'hidden', paddingBottom: 0, lineHeight: 0.82 }}>AGENTFLOW</div>
+      {/* AGENTFLOW wordmark */}
+      <div style={{ overflow: 'hidden', width: '100%', paddingTop: 16, position: 'relative' }}>
+        <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '60%', height: 80, background: 'radial-gradient(ellipse, rgba(131,199,50,0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div
+          className="footer-wordmark"
+          style={{
+            fontSize: 'clamp(40px, 13vw, 185px)',
+            letterSpacing: '-1px',
+            lineHeight: 0.85,
+            whiteSpace: 'nowrap',
+            display: 'block',
+            textAlign: 'center',
+            width: '100%',
+          }}
+        >
+          AGENTFLOW
+        </div>
       </div>
     </footer>
   )
