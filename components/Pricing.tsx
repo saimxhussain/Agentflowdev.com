@@ -42,23 +42,23 @@ function PricingCard({ p, i }: { p: typeof plans[0], i: number }) {
         background: p.featured ? 'var(--orange-subtle)' : 'var(--surface)',
         backdropFilter: 'blur(32px)', WebkitBackdropFilter: 'blur(32px)',
         padding: '40px 32px', borderRadius: 20,
-        border: p.featured ? '1px solid rgba(255,77,0,0.5)' : '1px solid var(--border)',
+        border: p.featured ? '1px solid rgba(131,199,50,0.5)' : '1px solid var(--border)',
         position: 'relative', height: '100%', display: 'flex', flexDirection: 'column',
-        boxShadow: p.featured ? '0 20px 60px rgba(255,77,0,0.2)' : '0 4px 24px rgba(0,0,0,0.1)',
+        boxShadow: p.featured ? '0 20px 60px rgba(131,199,50,0.2)' : '0 4px 24px rgba(0,0,0,0.1)',
         transform: p.featured ? 'translateY(-12px)' : 'none',
         transition: 'box-shadow 0.3s, transform 0.3s',
       }}
-        onMouseEnter={e => { const el = e.currentTarget as HTMLElement; if (p.featured) el.style.boxShadow = '0 32px 80px rgba(255,77,0,0.35)'; else el.style.boxShadow = '0 12px 40px rgba(0,0,0,0.15)' }}
-        onMouseLeave={e => { const el = e.currentTarget as HTMLElement; if (p.featured) el.style.boxShadow = '0 20px 60px rgba(255,77,0,0.2)'; else el.style.boxShadow = '0 4px 24px rgba(0,0,0,0.1)' }}
+        onMouseEnter={e => { const el = e.currentTarget as HTMLElement; if (p.featured) el.style.boxShadow = '0 32px 80px rgba(131,199,50,0.35)'; else el.style.boxShadow = '0 12px 40px rgba(0,0,0,0.15)' }}
+        onMouseLeave={e => { const el = e.currentTarget as HTMLElement; if (p.featured) el.style.boxShadow = '0 20px 60px rgba(131,199,50,0.2)'; else el.style.boxShadow = '0 4px 24px rgba(0,0,0,0.1)' }}
       >
         {p.tag && (
-          <div style={{ position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)', fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', background: 'var(--orange)', color: '#fff', padding: '5px 18px', borderRadius: 20, whiteSpace: 'nowrap' as const, boxShadow: '0 4px 16px rgba(255,77,0,0.5)' }}>{p.tag}</div>
+          <div style={{ position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)', fontFamily: 'EquitanSans, sans-serif', fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', background: 'var(--orange)', color: '#fff', padding: '5px 18px', borderRadius: 20, whiteSpace: 'nowrap' as const, boxShadow: '0 4px 16px rgba(131,199,50,0.5)' }}>{p.tag}</div>
         )}
 
         <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase' as const, color: p.featured ? 'var(--orange)' : 'var(--text-5)', marginBottom: 20 }}>{p.label}</div>
         <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: p.price === 'Custom' ? 44 : 56, color: 'var(--text)', lineHeight: 1, letterSpacing: -2, marginBottom: 4 }}>{p.price}</div>
         <div style={{ fontSize: 12, fontWeight: 400, color: 'var(--text-muted)', letterSpacing: 0.5, marginBottom: 20 }}>{p.sub}</div>
-        <p style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 24, paddingBottom: 24, borderBottom: `1px solid ${p.featured ? 'rgba(255,77,0,0.2)' : 'var(--border)'}` }}>{p.desc}</p>
+        <p style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 24, paddingBottom: 24, borderBottom: `1px solid ${p.featured ? 'rgba(131,199,50,0.2)' : 'var(--border)'}` }}>{p.desc}</p>
         <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12, flex: 1, marginBottom: 28 }}>
           {p.features.map((f, j) => (
             <li key={j} style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-3)', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -68,14 +68,14 @@ function PricingCard({ p, i }: { p: typeof plans[0], i: number }) {
         </ul>
         <a href={p.href} target="_blank" rel="noreferrer" style={{
           fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 12, letterSpacing: 1, textTransform: 'uppercase' as const,
-          background: p.featured ? 'linear-gradient(135deg, #FF4D00, #ff7733)' : 'transparent',
+          background: p.featured ? 'linear-gradient(135deg, #83C732, #7A9137)' : 'transparent',
           color: p.featured ? '#fff' : 'var(--text)', padding: '14px 24px', textDecoration: 'none',
           border: p.featured ? 'none' : '1px solid var(--border-2)',
           textAlign: 'center' as const, transition: 'all 0.2s', display: 'block', borderRadius: 10,
-          boxShadow: p.featured ? '0 4px 20px rgba(255,77,0,0.4)' : 'none',
+          boxShadow: p.featured ? '0 4px 20px rgba(131,199,50,0.4)' : 'none',
         }}
-          onMouseEnter={e => { const el = e.currentTarget as HTMLElement; if (p.featured) { el.style.boxShadow = '0 8px 32px rgba(255,77,0,0.6)'; el.style.transform = 'translateY(-1px)' } else { el.style.borderColor = 'var(--orange)'; el.style.color = 'var(--orange)'; el.style.background = 'var(--orange-subtle)' } }}
-          onMouseLeave={e => { const el = e.currentTarget as HTMLElement; if (p.featured) { el.style.boxShadow = '0 4px 20px rgba(255,77,0,0.4)'; el.style.transform = 'translateY(0)' } else { el.style.borderColor = 'var(--border-2)'; el.style.color = 'var(--text)'; el.style.background = 'transparent' } }}
+          onMouseEnter={e => { const el = e.currentTarget as HTMLElement; if (p.featured) { el.style.boxShadow = '0 8px 32px rgba(131,199,50,0.6)'; el.style.transform = 'translateY(-1px)' } else { el.style.borderColor = 'var(--orange)'; el.style.color = 'var(--orange)'; el.style.background = 'var(--orange-subtle)' } }}
+          onMouseLeave={e => { const el = e.currentTarget as HTMLElement; if (p.featured) { el.style.boxShadow = '0 4px 20px rgba(131,199,50,0.4)'; el.style.transform = 'translateY(0)' } else { el.style.borderColor = 'var(--border-2)'; el.style.color = 'var(--text)'; el.style.background = 'transparent' } }}
         >{p.cta} →</a>
       </div>
     </div>
@@ -85,7 +85,7 @@ function PricingCard({ p, i }: { p: typeof plans[0], i: number }) {
 export default function Pricing() {
   return (
     <section id="pricing" style={{ padding: '120px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
-      <div className="orb" style={{ width: 450, height: 450, background: 'rgba(255,77,0,0.07)', top: -100, left: '50%', transform: 'translateX(-50%)', animation: 'orbMove2 14s ease-in-out infinite' }} />
+      <div className="orb" style={{ width: 450, height: 450, background: 'rgba(131,199,50,0.07)', top: -100, left: '50%', transform: 'translateX(-50%)', animation: 'orbMove2 14s ease-in-out infinite' }} />
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         <Reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>

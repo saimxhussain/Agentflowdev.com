@@ -4,7 +4,7 @@ import Reveal from './Reveal'
 export default function CTA() {
   return (
     <section style={{ padding: '120px 0', position: 'relative', overflow: 'hidden' }}>
-      <div className="orb" style={{ width: 600, height: 600, background: 'rgba(255,77,0,0.10)', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', animation: 'orbMove 16s ease-in-out infinite' }} />
+      <div className="orb" style={{ width: 600, height: 600, background: 'rgba(131,199,50,0.10)', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', animation: 'orbMove 16s ease-in-out infinite' }} />
       <div className="orb" style={{ width: 300, height: 300, background: 'rgba(100,60,255,0.07)', top: 0, right: 0, animation: 'orbMove2 12s ease-in-out infinite' }} />
 
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
@@ -16,7 +16,7 @@ export default function CTA() {
             borderRadius: 28, padding: '80px 40px', textAlign: 'center',
             boxShadow: '0 40px 120px rgba(0,0,0,0.2)',
           }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--orange-subtle)', border: '1px solid rgba(255,77,0,0.25)', padding: '6px 16px', borderRadius: 100, marginBottom: 32 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--orange-subtle)', border: '1px solid rgba(131,199,50,0.25)', padding: '6px 16px', borderRadius: 100, marginBottom: 32 }}>
               <span style={{ width: 7, height: 7, background: 'var(--orange)', borderRadius: '50%', animation: 'gpulse 2s infinite' }} />
               <span style={{ fontFamily: 'EquitanSans, sans-serif', fontSize: 12, fontWeight: 600, color: 'var(--orange)', letterSpacing: 1 }}>Ready to automate?</span>
             </div>
@@ -31,10 +31,10 @@ export default function CTA() {
                 fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 13, letterSpacing: 1,
                 textTransform: 'uppercase', background: 'var(--orange)', color: '#fff', padding: '16px 40px',
                 textDecoration: 'none', borderRadius: 10, display: 'inline-flex', alignItems: 'center', gap: 8,
-                transition: 'all 0.2s', boxShadow: '0 8px 32px rgba(255,77,0,0.45)',
+                transition: 'all 0.2s', boxShadow: '0 8px 32px rgba(131,199,50,0.45)',
               }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#e04400'; el.style.transform = 'translateY(-2px)'; el.style.boxShadow = '0 16px 48px rgba(255,77,0,0.6)' }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'var(--orange)'; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 8px 32px rgba(255,77,0,0.45)' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#e04400'; el.style.transform = 'translateY(-2px)'; el.style.boxShadow = '0 16px 48px rgba(131,199,50,0.6)' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'var(--orange)'; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 8px 32px rgba(131,199,50,0.45)' }}
               >Schedule a Call →</a>
               <a href="mailto:saimxhussain@gmail.com" style={{
                 fontFamily: 'EquitanSans, sans-serif', fontWeight: 600, fontSize: 13, letterSpacing: 1,
@@ -50,7 +50,7 @@ export default function CTA() {
           </div>
         </Reveal>
       </div>
-      <style>{`@keyframes gpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,77,0,.5)}70%{box-shadow:0 0 0 10px rgba(255,77,0,0)}}`}</style>
+      <style>{`@keyframes gpulse{0%,100%{box-shadow:0 0 0 0 rgba(131,199,50,.5)}70%{box-shadow:0 0 0 10px rgba(131,199,50,0)}}`}</style>
     </section>
   )
 }

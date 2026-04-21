@@ -76,7 +76,7 @@ export default function Footer() {
       </div>
 
       <div style={{ overflow: 'hidden', paddingTop: 24, position: 'relative' }}>
-        <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '70%', height: 80, background: 'radial-gradient(ellipse, rgba(255,77,0,0.18) 0%, transparent 70%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '70%', height: 80, background: 'radial-gradient(ellipse, rgba(131,199,50,0.18) 0%, transparent 70%)', pointerEvents: 'none' }} />
         <div className="footer-brand" style={{
           fontFamily: 'EquitanSans, sans-serif', fontWeight: 900,
           fontSize: 'clamp(80px, 18vw, 240px)', lineHeight: 0.85, letterSpacing: -6,

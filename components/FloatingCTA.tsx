@@ -22,13 +22,13 @@ export default function FloatingCTA() {
         fontFamily: 'EquitanSans, sans-serif',
         fontWeight: 700, fontSize: 12, letterSpacing: 1,
         textTransform: 'uppercase',
-        background: 'linear-gradient(135deg, #FF4D00, #ff7733)',
+        background: 'linear-gradient(135deg, #83C732, #7A9137)',
         color: '#fff',
         padding: '13px 22px',
         borderRadius: 50,
         textDecoration: 'none',
         display: 'flex', alignItems: 'center', gap: 8,
-        boxShadow: '0 8px 32px rgba(255,77,0,0.5), 0 2px 8px rgba(0,0,0,0.3)',
+        boxShadow: '0 8px 32px rgba(131,199,50,0.5), 0 2px 8px rgba(0,0,0,0.3)',
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.95)',
         transition: 'opacity 0.3s ease, transform 0.3s ease, box-shadow 0.2s',
@@ -36,12 +36,12 @@ export default function FloatingCTA() {
       }}
       onMouseEnter={e => {
         const el = e.currentTarget as HTMLElement
-        el.style.boxShadow = '0 16px 48px rgba(255,77,0,0.7), 0 2px 8px rgba(0,0,0,0.3)'
+        el.style.boxShadow = '0 16px 48px rgba(131,199,50,0.7), 0 2px 8px rgba(0,0,0,0.3)'
         el.style.transform = 'translateY(-2px) scale(1.03)'
       }}
       onMouseLeave={e => {
         const el = e.currentTarget as HTMLElement
-        el.style.boxShadow = '0 8px 32px rgba(255,77,0,0.5), 0 2px 8px rgba(0,0,0,0.3)'
+        el.style.boxShadow = '0 8px 32px rgba(131,199,50,0.5), 0 2px 8px rgba(0,0,0,0.3)'
         el.style.transform = 'translateY(0) scale(1)'
       }}
     >

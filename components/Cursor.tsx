@@ -39,14 +39,14 @@ export default function Cursor() {
     const onHoverIn = () => {
       ring.style.width = '48px'
       ring.style.height = '48px'
-      ring.style.borderColor = 'rgba(255,77,0,0.9)'
-      ring.style.boxShadow = '0 0 16px rgba(255,77,0,0.5)'
+      ring.style.borderColor = 'rgba(131,199,50,0.9)'
+      ring.style.boxShadow = '0 0 16px rgba(131,199,50,0.5)'
     }
     const onHoverOut = () => {
       ring.style.width = '36px'
       ring.style.height = '36px'
-      ring.style.borderColor = 'rgba(255,77,0,0.7)'
-      ring.style.boxShadow = '0 0 12px rgba(255,77,0,0.3)'
+      ring.style.borderColor = 'rgba(131,199,50,0.7)'
+      ring.style.boxShadow = '0 0 12px rgba(131,199,50,0.3)'
     }
 
     const attachHover = () => {
@@ -87,8 +87,8 @@ export default function Cursor() {
           top: 0, left: 0,
           width: 36, height: 36,
           borderRadius: '50%',
-          border: '2px solid rgba(255,77,0,0.7)',
-          boxShadow: '0 0 12px rgba(255,77,0,0.3)',
+          border: '2px solid rgba(131,199,50,0.7)',
+          boxShadow: '0 0 12px rgba(131,199,50,0.3)',
           pointerEvents: 'none',
           zIndex: 99999,
           opacity: 0,
@@ -104,8 +104,8 @@ export default function Cursor() {
           top: 0, left: 0,
           width: 10, height: 10,
           borderRadius: '50%',
-          background: '#FF4D00',
-          boxShadow: '0 0 8px rgba(255,77,0,0.9), 0 0 20px rgba(255,77,0,0.4)',
+          background: '#83C732',
+          boxShadow: '0 0 8px rgba(131,199,50,0.9), 0 0 20px rgba(131,199,50,0.4)',
           pointerEvents: 'none',
           zIndex: 99999,
           opacity: 0,

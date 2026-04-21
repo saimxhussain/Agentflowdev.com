@@ -16,7 +16,7 @@ export default function FAQ() {
 
   return (
     <section id="faq" style={{ padding: '120px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
-      <div className="orb" style={{ width: 400, height: 400, background: 'rgba(255,77,0,0.06)', bottom: -100, right: -100, animation: 'orbMove2 18s ease-in-out infinite' }} />
+      <div className="orb" style={{ width: 400, height: 400, background: 'rgba(131,199,50,0.06)', bottom: -100, right: -100, animation: 'orbMove2 18s ease-in-out infinite' }} />
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         <Reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
@@ -37,7 +37,7 @@ export default function FAQ() {
           {faqs.map((faq, i) => (
             <div key={i} onClick={() => setOpen(open === i ? null : i)} style={{
               background: open === i ? 'var(--orange-surface)' : 'var(--surface-3)',
-              border: `1px solid ${open === i ? 'rgba(255,77,0,0.25)' : 'var(--border)'}`,
+              border: `1px solid ${open === i ? 'rgba(131,199,50,0.25)' : 'var(--border)'}`,
               borderRadius: 14, cursor: 'pointer', transition: 'all 0.25s ease', overflow: 'hidden',
             }}
               onMouseEnter={e => { if (open !== i) { const el = e.currentTarget as HTMLElement; el.style.background = 'var(--surface)'; el.style.borderColor = 'var(--border-2)' } }}

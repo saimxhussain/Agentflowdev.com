@@ -60,16 +60,16 @@ export default function WhatsAppButton() {
           width: 56,
           height: 56,
           borderRadius: '50%',
-          background: 'linear-gradient(135deg, #FF4D00, #ff7733)',
+          background: 'linear-gradient(135deg, #83C732, #7A9137)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 4px 24px rgba(255,77,0,0.45)',
+          boxShadow: '0 4px 24px rgba(131,199,50,0.45)',
           transition: 'transform 0.2s, box-shadow 0.2s',
           flexShrink: 0,
         }}
-        onMouseOver={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'scale(1.1)'; el.style.boxShadow = '0 8px 32px rgba(255,77,0,0.6)' }}
-        onMouseOut={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'scale(1)'; el.style.boxShadow = '0 4px 24px rgba(255,77,0,0.45)' }}
+        onMouseOver={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'scale(1.1)'; el.style.boxShadow = '0 8px 32px rgba(131,199,50,0.6)' }}
+        onMouseOut={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'scale(1)'; el.style.boxShadow = '0 4px 24px rgba(131,199,50,0.45)' }}
       >
         {/* WhatsApp SVG icon */}
         <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
@@ -82,7 +82,7 @@ export default function WhatsAppButton() {
           width: 56,
           height: 56,
           borderRadius: '50%',
-          border: '2px solid rgba(255,77,0,0.5)',
+          border: '2px solid rgba(131,199,50,0.5)',
           animation: 'waPulse 2s ease-out infinite',
           pointerEvents: 'none',
         }} />

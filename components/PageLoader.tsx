@@ -66,15 +66,15 @@ export default function PageLoader() {
           transform: phase === 'enter' ? 'translateY(12px)' : 'translateY(0)',
           transition: 'opacity 0.5s ease, transform 0.5s ease',
         }}>
-          AGENTFLOW<span style={{ color: '#FF4D00' }}>.</span>
+          AGENTFLOW<span style={{ color: '#83C732' }}>.</span>
         </div>
 
         {/* Thin orange line under logo */}
         <div style={{
           height: 2,
-          background: '#FF4D00',
+          background: '#83C732',
           borderRadius: 2,
-          boxShadow: '0 0 12px rgba(255,77,0,0.7)',
+          boxShadow: '0 0 12px rgba(131,199,50,0.7)',
           width: phase === 'enter' ? 0 : 120,
           transition: 'width 0.5s ease 0.2s',
         }} />

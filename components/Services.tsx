@@ -26,7 +26,7 @@ const icons: Record<string, React.ReactNode> = {
 export default function Services() {
   return (
     <section id="services" style={{ padding: '120px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
-      <div className="orb" style={{ width: 500, height: 500, background: 'rgba(255,77,0,0.06)', top: -150, right: -150, animation: 'orbMove 18s ease-in-out infinite' }} />
+      <div className="orb" style={{ width: 500, height: 500, background: 'rgba(131,199,50,0.06)', top: -150, right: -150, animation: 'orbMove 18s ease-in-out infinite' }} />
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         <Reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
@@ -59,7 +59,7 @@ export default function Services() {
                 border: '1px solid var(--border)', transition: 'all 0.25s', cursor: 'default',
                 height: '100%', boxSizing: 'border-box' as const,
               }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(255,77,0,0.5)'; el.style.transform = 'translateY(-4px)'; el.style.background = 'var(--orange-surface)'; el.style.boxShadow = '0 12px 40px rgba(255,77,0,0.12)' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'rgba(131,199,50,0.5)'; el.style.transform = 'translateY(-4px)'; el.style.background = 'var(--orange-surface)'; el.style.boxShadow = '0 12px 40px rgba(131,199,50,0.12)' }}
                 onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = 'var(--border)'; el.style.transform = 'translateY(0)'; el.style.background = 'var(--surface)'; el.style.boxShadow = 'none' }}
               >
                 <div style={{ color: 'var(--orange)', marginBottom: 16, display: 'flex' }}>{icons[s.tag]}</div>

@@ -58,7 +58,7 @@ function CaseCard({ c, index }: { c: typeof cases[0], index: number }) {
           <h3 style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 'clamp(22px, 2.5vw, 32px)', color: 'var(--text)', letterSpacing: -1, lineHeight: 1.1, marginBottom: 16 }}>{c.title}</h3>
           <p style={{ fontSize: 13, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.75, marginBottom: 20 }}>{c.desc}</p>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            {c.tags.map((t, j) => <span key={j} style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: 'var(--orange)', background: 'var(--orange-subtle)', border: '1px solid rgba(255,77,0,0.2)', padding: '4px 10px', borderRadius: 6 }}>{t}</span>)}
+            {c.tags.map((t, j) => <span key={j} style={{ fontSize: 10, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: 'var(--orange)', background: 'var(--orange-subtle)', border: '1px solid rgba(131,199,50,0.2)', padding: '4px 10px', borderRadius: 6 }}>{t}</span>)}
           </div>
         </div>
         <div style={{ padding: '36px 32px', borderRight: '1px solid var(--border-3)', borderBottom: '1px solid var(--border-3)' }}>
@@ -76,7 +76,7 @@ function CaseCard({ c, index }: { c: typeof cases[0], index: number }) {
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: 'var(--orange)', marginBottom: 24 }}>After AgentFlow</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {c.after.map((a, j) => (
-              <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, borderBottom: '1px solid rgba(255,77,0,0.08)' }}>
+              <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 14, borderBottom: '1px solid rgba(131,199,50,0.08)' }}>
                 <span style={{ fontSize: 12, color: 'var(--text-4)' }}>{a.l}</span>
                 <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 14, color: 'var(--orange)' }}>{a.v}</span>
               </div>

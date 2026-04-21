@@ -52,11 +52,11 @@ function MetricCard({ m, i }: { m: typeof metrics[0], i: number }) {
       border: i === 0 ? 'none' : '1px solid var(--metric-card-border)',
       padding: '32px 24px',
       borderRadius: i === 0 ? '16px 4px 4px 4px' : i === 1 ? '4px 16px 4px 4px' : i === 2 ? '4px 4px 4px 16px' : '4px 4px 16px 4px',
-      boxShadow: i === 0 ? '0 8px 32px rgba(255,77,0,0.3)' : 'none',
+      boxShadow: i === 0 ? '0 8px 32px rgba(131,199,50,0.3)' : 'none',
       transition: 'transform 0.2s, box-shadow 0.2s',
     }}
-      onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = i === 0 ? '0 16px 48px rgba(255,77,0,0.45)' : '0 8px 32px rgba(0,0,0,0.15)' }}
-      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = i === 0 ? '0 8px 32px rgba(255,77,0,0.3)' : 'none' }}
+      onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-4px)'; el.style.boxShadow = i === 0 ? '0 16px 48px rgba(131,199,50,0.45)' : '0 8px 32px rgba(0,0,0,0.15)' }}
+      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = i === 0 ? '0 8px 32px rgba(131,199,50,0.3)' : 'none' }}
     >
       <div style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 40, color: i === 0 ? '#fff' : 'var(--orange)', lineHeight: 1, letterSpacing: -1, marginBottom: 8 }}>
         <CountUp target={parseInt(m.val)} suffix={m.suffix} started={started} />
@@ -69,7 +69,7 @@ function MetricCard({ m, i }: { m: typeof metrics[0], i: number }) {
 export default function About() {
   return (
     <section id="about" style={{ padding: '120px 0', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
-      <div className="orb" style={{ width: 400, height: 400, background: 'rgba(255,77,0,0.07)', top: -100, left: -100, animation: 'orbMove2 16s ease-in-out infinite' }} />
+      <div className="orb" style={{ width: 400, height: 400, background: 'rgba(131,199,50,0.07)', top: -100, left: -100, animation: 'orbMove2 16s ease-in-out infinite' }} />
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
         <Reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>

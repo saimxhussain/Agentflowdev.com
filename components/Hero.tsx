@@ -36,7 +36,7 @@ export default function Hero() {
         WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%)',
       }} />
 
-      <div className="orb" style={{ width: 600, height: 600, background: 'rgba(255,77,0,0.13)', top: -150, right: -100, animation: 'orbMove 14s ease-in-out infinite' }} />
+      <div className="orb" style={{ width: 600, height: 600, background: 'rgba(131,199,50,0.13)', top: -150, right: -100, animation: 'orbMove 14s ease-in-out infinite' }} />
       <div className="orb" style={{ width: 500, height: 500, background: 'rgba(100,60,255,0.09)', bottom: -120, left: -100, animation: 'orbMove2 18s ease-in-out infinite' }} />
 
       <div style={{ position: 'absolute', top: 68, left: 0, right: 0, height: 1, background: 'linear-gradient(90deg, transparent, var(--orange-glow), transparent)', zIndex: 1 }} />
@@ -52,7 +52,7 @@ export default function Hero() {
               animation: 'fadeUp 0.6s ease forwards',
             }}>
               Automate everything.<br />
-              <span style={{ color: 'var(--orange)', textShadow: '0 0 40px rgba(255,77,0,0.5)' }}>Dominate</span> your market.
+              <span style={{ color: 'var(--orange)', textShadow: '0 0 40px rgba(131,199,50,0.5)' }}>Dominate</span> your market.
             </h1>
 
             <p style={{ fontSize: 17, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.75, maxWidth: 480, marginBottom: 36, animation: 'fadeUp 0.6s 0.1s ease both' }}>
@@ -65,11 +65,11 @@ export default function Hero() {
                 fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 13, letterSpacing: 1,
                 textTransform: 'uppercase', color: '#fff', padding: '14px 32px',
                 textDecoration: 'none', borderRadius: 10, display: 'inline-flex', alignItems: 'center', gap: 8,
-                transition: 'all 0.2s', background: 'linear-gradient(135deg, #FF4D00, #ff7733)',
-                boxShadow: '0 4px 24px rgba(255,77,0,0.45), inset 0 1px 0 rgba(255,255,255,0.2)',
+                transition: 'all 0.2s', background: 'linear-gradient(135deg, #83C732, #7A9137)',
+                boxShadow: '0 4px 24px rgba(131,199,50,0.45), inset 0 1px 0 rgba(255,255,255,0.2)',
               }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-2px)'; el.style.boxShadow = '0 12px 40px rgba(255,77,0,0.6), inset 0 1px 0 rgba(255,255,255,0.2)' }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 4px 24px rgba(255,77,0,0.45), inset 0 1px 0 rgba(255,255,255,0.2)' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-2px)'; el.style.boxShadow = '0 12px 40px rgba(131,199,50,0.6), inset 0 1px 0 rgba(255,255,255,0.2)' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 4px 24px rgba(131,199,50,0.45), inset 0 1px 0 rgba(255,255,255,0.2)' }}
               >Book a Free Call →</a>
               <a href="#services" style={{
                 fontFamily: 'EquitanSans, sans-serif', fontWeight: 600, fontSize: 13, letterSpacing: 1,
@@ -103,7 +103,7 @@ export default function Hero() {
                   background: active === i ? 'var(--orange)' : 'var(--surface-2)',
                   color: active === i ? '#fff' : 'var(--text-4)',
                   backdropFilter: 'blur(12px)',
-                  boxShadow: active === i ? '0 2px 16px rgba(255,77,0,0.4)' : 'none',
+                  boxShadow: active === i ? '0 2px 16px rgba(131,199,50,0.4)' : 'none',
                 }}>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: active === i ? 'rgba(255,255,255,0.7)' : 'var(--text-5)' }} />
@@ -133,7 +133,7 @@ export default function Hero() {
                   <source src={TABS[displayed].src} type="video/mp4" />
                 </video>
               </div>
-              <div style={{ position: 'absolute', bottom: 60, right: 16, background: 'rgba(255,77,0,0.9)', backdropFilter: 'blur(8px)', color: '#fff', fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: '5px 12px', borderRadius: 20, textTransform: 'uppercase' }}>{TABS[displayed].tag}</div>
+              <div style={{ position: 'absolute', bottom: 60, right: 16, background: 'rgba(131,199,50,0.9)', backdropFilter: 'blur(8px)', color: '#fff', fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: '5px 12px', borderRadius: 20, textTransform: 'uppercase' }}>{TABS[displayed].tag}</div>
             </div>
 
             <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>

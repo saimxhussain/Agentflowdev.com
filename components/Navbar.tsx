@@ -105,8 +105,8 @@ export default function Navbar() {
           position: 'absolute', bottom: 0, left: 0,
           height: 2,
           width: `${progress}%`,
-          background: 'linear-gradient(90deg, #FF4D00, #ff7733)',
-          boxShadow: '0 0 8px rgba(255,77,0,0.6)',
+          background: 'linear-gradient(90deg, #83C732, #7A9137)',
+          boxShadow: '0 0 8px rgba(131,199,50,0.6)',
           transition: 'width 0.1s linear',
           borderRadius: '0 2px 2px 0',
         }} />
@@ -115,7 +115,7 @@ export default function Navbar() {
           <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
             <Image src="/logo.png" alt="AgentFlow" width={36} height={36} style={{ borderRadius: 8 }} />
             <span style={{ fontFamily: 'EquitanSans, sans-serif', fontWeight: 900, fontSize: 20, letterSpacing: 2, color: '#fff' }}>
-              AGENTFLOW<span style={{ color: '#FF4D00' }}>.</span>
+              AGENTFLOW<span style={{ color: '#83C732' }}>.</span>
             </span>
           </a>
 
@@ -141,7 +141,7 @@ export default function Navbar() {
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.12)' }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)' }}
               >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF4D00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#83C732" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
                   <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                 </svg>
@@ -168,12 +168,12 @@ export default function Navbar() {
                   <div style={{ maxHeight: 220, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 2 }}>
                     {filtered.map(c => (
                       <div key={c.code} onClick={() => selectCountry(c)}
-                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 12px', borderRadius: 8, cursor: 'pointer', background: country?.code === c.code ? 'rgba(255,77,0,0.12)' : 'transparent', transition: 'all 0.15s' }}
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 12px', borderRadius: 8, cursor: 'pointer', background: country?.code === c.code ? 'rgba(131,199,50,0.12)' : 'transparent', transition: 'all 0.15s' }}
                         onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.07)' }}
-                        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = country?.code === c.code ? 'rgba(255,77,0,0.12)' : 'transparent' }}
+                        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = country?.code === c.code ? 'rgba(131,199,50,0.12)' : 'transparent' }}
                       >
                         <span style={{ fontSize: 13, fontWeight: 500, color: '#fff' }}>{c.name}</span>
-                        <span style={{ fontSize: 11, fontWeight: 700, color: '#FF4D00' }}>{c.symbol}</span>
+                        <span style={{ fontSize: 11, fontWeight: 700, color: '#83C732' }}>{c.symbol}</span>
                       </div>
                     ))}
                   </div>
@@ -204,13 +204,13 @@ export default function Navbar() {
               <a href="https://cal.com/saim-hussain-9ekrz6" target="_blank" rel="noreferrer" style={{
                 fontFamily: 'EquitanSans, sans-serif', fontWeight: 700, fontSize: 12,
                 letterSpacing: 1, textTransform: 'uppercase',
-                background: 'linear-gradient(135deg, #FF4D00, #ff7733)',
+                background: 'linear-gradient(135deg, #83C732, #7A9137)',
                 color: '#fff', padding: '10px 22px', textDecoration: 'none',
                 borderRadius: 8, transition: 'all 0.2s', display: 'inline-block',
-                boxShadow: '0 2px 16px rgba(255,77,0,0.35)',
+                boxShadow: '0 2px 16px rgba(131,199,50,0.35)',
               }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-1px)'; el.style.boxShadow = '0 6px 24px rgba(255,77,0,0.55)' }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 2px 16px rgba(255,77,0,0.35)' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(-1px)'; el.style.boxShadow = '0 6px 24px rgba(131,199,50,0.55)' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = 'translateY(0)'; el.style.boxShadow = '0 2px 16px rgba(131,199,50,0.35)' }}
               >Book a Call →</a>
             </li>
           </ul>
