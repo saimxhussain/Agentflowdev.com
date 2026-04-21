@@ -30,22 +30,12 @@ export default function Process() {
       id="process"
       style={{
         padding: '140px 0',
-        background: 'linear-gradient(180deg, #0a0a0a 0%, #111 40%, #0d0d0d 100%)',
+        background: 'var(--bg)',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Subtle grid texture overlay */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        backgroundImage: `
-          linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)
-        `,
-        backgroundSize: '60px 60px',
-        pointerEvents: 'none',
-      }} />
+
 
       {/* Radial glow in center */}
       <div style={{
@@ -92,7 +82,7 @@ export default function Process() {
           top: '200px',
           bottom: '60px',
           width: '1px',
-          background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.12) 10%, rgba(255,255,255,0.12) 90%, transparent)',
+          background: 'linear-gradient(to bottom, transparent, var(--section-line) 10%, var(--section-line) 90%, transparent)',
           transform: 'translateX(-50%)',
           zIndex: 1,
         }} />
@@ -120,7 +110,7 @@ export default function Process() {
                   height: '16px',
                   background: '#83C732',
                   borderRadius: '50%',
-                  boxShadow: '0 0 20px 6px rgba(131, 199, 50, 0.45)',
+                  boxShadow: '0 0 20px 6px rgba(131, 199, 50, 0.4)',
                   border: '3px solid #0d0d0d',
                   zIndex: 5,
                 }} />
@@ -130,8 +120,8 @@ export default function Process() {
                   className="process-card"
                   style={{
                     width: '44%',
-                    background: 'rgba(20, 20, 20, 0.9)',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    background: 'var(--surface)',
+                    border: '1px solid var(--border-2)',
                     borderRadius: 20,
                     overflow: 'hidden',
                     backdropFilter: 'blur(16px)',
@@ -147,8 +137,8 @@ export default function Process() {
                   {/* Header */}
                   <div style={{
                     padding: '28px 32px 24px',
-                    background: 'rgba(255,255,255,0.02)',
-                    borderBottom: '1px solid rgba(255,255,255,0.06)',
+                    background: 'var(--surface-3)',
+                    borderBottom: '1px solid var(--border)',
                     display: 'flex',
                     alignItems: 'flex-start',
                     gap: 20,
@@ -156,7 +146,7 @@ export default function Process() {
                     <div style={{
                       fontFamily: 'serif',
                       fontSize: '52px',
-                      color: 'rgba(255,255,255,0.06)',
+                      color: 'var(--text-6)',
                       lineHeight: 1,
                       flexShrink: 0,
                       marginTop: 2,
@@ -189,7 +179,7 @@ export default function Process() {
                   {/* Body */}
                   <div style={{ padding: '28px 32px 32px' }}>
                     <p style={{
-                      color: '#999',
+                      color: 'var(--text-3)',
                       lineHeight: 1.7,
                       marginBottom: 24,
                       fontSize: 14,
