@@ -50,7 +50,7 @@ function LiquidText() {
         lineHeight: 1,
         whiteSpace: 'nowrap',
         display: 'inline-block',
-        transformOrigin: 'left center',
+        transformOrigin: 'center center',
         WebkitTextStroke: '1.5px rgba(255,255,255,0.22)',
         background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(131,199,50,0.10) 45%, rgba(255,255,255,0.05) 100%)',
         WebkitBackgroundClip: 'text',
