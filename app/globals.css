@@ -39,13 +39,13 @@ html { scroll-behavior: smooth; }
   --glass-bg-strong: rgba(255,255,255,0.10);
   --glass-border:  rgba(255,255,255,0.11);
   --glass-border-strong: rgba(255,255,255,0.20);
-  --orange:        #FF4D00;
-  --orange-glow:   rgba(255,77,0,0.4);
-  --orange-subtle: rgba(255,77,0,0.10);
-  --orange-surface:rgba(255,77,0,0.06);
+  --orange:        #83C732;
+  --orange-glow:   rgba(131,199,50,0.4);
+  --orange-subtle: rgba(131,199,50,0.10);
+  --orange-surface:rgba(131,199,50,0.06);
   --scrollbar-track: #111;
   --scrollbar-thumb: #333;
-  --grid-line:     rgba(255,77,0,0.04);
+  --grid-line:     rgba(131,199,50,0.04);
   --section-line:  rgba(255,255,255,0.06);
   --metric-card-bg: rgba(255,255,255,0.05);
   --metric-card-border: rgba(255,255,255,0.10);
@@ -76,17 +76,21 @@ html { scroll-behavior: smooth; }
   --glass-bg-strong: rgba(0,0,0,0.09);
   --glass-border:  rgba(0,0,0,0.12);
   --glass-border-strong: rgba(0,0,0,0.20);
-  --orange:        #FF4D00;
-  --orange-glow:   rgba(255,77,0,0.35);
-  --orange-subtle: rgba(255,77,0,0.10);
-  --orange-surface:rgba(255,77,0,0.05);
+  --orange:        #83C732;
+  --orange-glow:   rgba(131,199,50,0.35);
+  --orange-subtle: rgba(131,199,50,0.10);
+  --orange-surface:rgba(131,199,50,0.05);
   --scrollbar-track: #e0e0d8;
   --scrollbar-thumb: #bbb;
-  --grid-line:     rgba(255,77,0,0.05);
+  --grid-line:     rgba(131,199,50,0.05);
   --section-line:  rgba(0,0,0,0.07);
   --metric-card-bg: rgba(0,0,0,0.04);
   --metric-card-border: rgba(0,0,0,0.09);
   --loader-bg:     #f5f5f0;
+}
+
+html {
+  font-size: 17px;
 }
 
 body {
@@ -94,6 +98,7 @@ body {
   color: var(--text);
   font-family: 'EquitanSans', sans-serif;
   font-weight: 400;
+  font-size: 1rem;
   overflow-x: hidden;
   transition: background 0.3s ease, color 0.3s ease;
 }
@@ -137,7 +142,7 @@ section::before {
 
 .ticker-inner { display:inline-flex; animation:ticker 28s linear infinite; }
 @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-@keyframes gpulse { 0%,100%{box-shadow:0 0 0 0 rgba(255,77,0,.5)} 70%{box-shadow:0 0 0 10px rgba(255,77,0,0)} }
+@keyframes gpulse { 0%,100%{box-shadow:0 0 0 0 rgba(131,199,50,.5)} 70%{box-shadow:0 0 0 10px rgba(131,199,50,0)} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 @keyframes orbMove { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(80px,-50px) scale(1.1)} 66%{transform:translate(-50px,40px) scale(0.95)} }
 @keyframes orbMove2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-60px,50px)} }
