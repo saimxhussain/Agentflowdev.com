@@ -7,7 +7,7 @@ const TABS = [
 ]
 const TRUSTED = ['n8n', 'OpenAI', 'Apollo.io', 'HubSpot', 'LinkedIn', 'Make.com']
 
-// ─── Static Glass / Transparent Text ────────────────────────────────────────
+// ─── Wave Fill Text ─────────────────────────────────────────────────────────
 function LiquidText() {
   const wrapRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLSpanElement>(null)
@@ -17,17 +17,13 @@ function LiquidText() {
       const wrap = wrapRef.current
       const text = textRef.current
       if (!wrap || !text) return
-      // Reset scale so we get natural width
       text.style.transform = 'scaleX(1)'
       const available = wrap.offsetWidth - 4
       const natural = text.scrollWidth
-      if (natural > available) {
-        text.style.transform = `scaleX(${available / natural})`
-      }
+      if (natural > available) text.style.transform = `scaleX(${available / natural})`
     }
     fit()
     window.addEventListener('resize', fit)
-    // Also run after font loads
     document.fonts?.ready.then(fit)
     return () => window.removeEventListener('resize', fit)
   }, [])
@@ -42,7 +38,7 @@ function LiquidText() {
       padding: '8px 0',
       pointerEvents: 'none',
     }}>
-      <span ref={textRef} style={{
+      <span ref={textRef} className="wave-text" style={{
         fontFamily: 'var(--font-display), MonumentExtended, sans-serif',
         fontWeight: 800,
         fontSize: '96px',
@@ -51,16 +47,61 @@ function LiquidText() {
         whiteSpace: 'nowrap',
         display: 'inline-block',
         transformOrigin: 'center center',
-        WebkitTextStroke: '1.5px rgba(255,255,255,0.22)',
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(131,199,50,0.10) 45%, rgba(255,255,255,0.05) 100%)',
-        WebkitBackgroundClip: 'text',
-        backgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        filter: 'drop-shadow(0 0 24px rgba(131,199,50,0.20))',
+        position: 'relative',
         userSelect: 'none',
+        // Outline text as base
+        WebkitTextStroke: '1.5px rgba(255,255,255,0.22)',
+        WebkitTextFillColor: 'transparent',
+        color: 'transparent',
       }}>
         AgentFlow
+        {/* Wave fill overlay */}
+        <span className="wave-fill" aria-hidden="true" style={{
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+        }}>
+          <span style={{
+            fontFamily: 'var(--font-display), MonumentExtended, sans-serif',
+            fontWeight: 800,
+            fontSize: '96px',
+            letterSpacing: '0.06em',
+            lineHeight: 1,
+            whiteSpace: 'nowrap',
+            WebkitTextFillColor: '#83C732',
+            color: '#83C732',
+            WebkitTextStroke: '0px',
+            // Wave-shaped clip using polygon with animated keyframes
+            animation: 'waveRise 3.6s ease-in-out infinite',
+          }}>AgentFlow</span>
+        </span>
       </span>
+
+      <style>{`
+        .wave-fill {
+          clip-path: polygon(
+            -5% 110%,
+            10% 100%,
+            25% 110%,
+            40% 100%,
+            55% 110%,
+            70% 100%,
+            85% 110%,
+            105% 100%,
+            105% 110%
+          );
+          animation: waveClip 3.6s ease-in-out infinite !important;
+        }
+        @keyframes waveClip {
+          0%   { clip-path: polygon(-5% 110%, 10% 100%, 25% 110%, 40% 100%, 55% 110%, 70% 100%, 85% 110%, 105% 100%, 105% 110%); }
+          42%  { clip-path: polygon(-5% -10%, 10% -20%, 25% -10%, 40% -20%, 55% -10%, 70% -20%, 85% -10%, 105% -20%, 105% 110%); }
+          58%  { clip-path: polygon(-5% -10%, 10% -20%, 25% -10%, 40% -20%, 55% -10%, 70% -20%, 85% -10%, 105% -20%, 105% 110%); }
+          100% { clip-path: polygon(-5% 110%, 10% 100%, 25% 110%, 40% 100%, 55% 110%, 70% 100%, 85% 110%, 105% 100%, 105% 110%); }
+        }
+      `}</style>
     </div>
   )
 }
@@ -151,8 +192,7 @@ export default function Hero() {
           {[
             { label: 'Book a Free Consultation', href: 'https://cal.com/saim-hussain-9ekrz6', primary: true },
             { label: 'Our Services', href: '#services', primary: false },
-            { label: 'Our Passion', href: '#about', primary: false },
-          ].map((btn, i) => (
+            ].map((btn, i) => (
             <a key={i} href={btn.href} target={btn.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer"
               style={{
                 fontFamily: 'var(--font-body),Degular,sans-serif', fontWeight: 600, fontSize: 14,
@@ -176,8 +216,8 @@ export default function Hero() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 24 }}>
           {[{ n: '10X', l: 'Faster leads' }, { n: '80%', l: 'Time saved' }, { n: '24/7', l: 'AI agents' }, { n: '6+', l: 'Platforms' }].map((s, i) => (
             <div key={i} style={{ textAlign: 'center', paddingRight: 16, borderRight: i < 3 ? '1px solid rgba(255,255,255,0.1)' : 'none', paddingLeft: i > 0 ? 16 : 0 }}>
-              <div style={{ fontFamily: 'var(--font-display),MonumentExtended,sans-serif', fontSize: 40, color: '#83C732', lineHeight: 1, letterSpacing: 1 }}>{s.n}</div>
-              <div style={{ fontFamily: 'var(--font-body),Degular,sans-serif', fontSize: 12, fontWeight: 500, color: 'rgba(245,240,234,0.5)', marginTop: 4 }}>{s.l}</div>
+              <div style={{ fontFamily: 'var(--font-display),MonumentExtended,sans-serif', fontSize: 44, fontWeight: 900, color: '#83C732', lineHeight: 1, letterSpacing: 1 }}>{s.n}</div>
+              <div style={{ fontFamily: 'var(--font-body),Degular,sans-serif', fontSize: 12, fontWeight: 700, color: 'rgba(245,240,234,0.6)', marginTop: 4, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{s.l}</div>
             </div>
           ))}
         </div>
