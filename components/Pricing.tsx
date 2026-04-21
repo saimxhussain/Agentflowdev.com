@@ -63,7 +63,7 @@ function PricingCard({ p, i }: { p: typeof plans[0], i: number }) {
           <div style={{ position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)', fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', background: 'var(--orange)', color: '#fff', padding: '5px 18px', borderRadius: 20, whiteSpace: 'nowrap' as const, boxShadow: '0 4px 16px rgba(131,199,50,0.4)' }}>{p.tag}</div>
         )}
         <div style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase' as const, color: p.featured ? 'var(--orange)' : 'var(--text-5)', marginBottom: 20 }}>{p.label}</div>
-        <div style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: p.price === 'Custom' ? 52 : 64, color: 'var(--text)', lineHeight: 1, letterSpacing: 1, marginBottom: 4 }}>{p.price}</div>
+        <div style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: p.price === 'Custom' ? 48 : 60, color: 'var(--text)', lineHeight: 1, letterSpacing: -1, marginBottom: 4 }}>{p.price}</div>
         <div style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 13, fontWeight: 400, color: 'var(--text-muted)', letterSpacing: 0.5, marginBottom: 20 }}>{p.sub}</div>
         <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 15, fontWeight: 400, color: 'var(--text-3)', lineHeight: 1.7, marginBottom: 24, paddingBottom: 24, borderBottom: `1px solid ${p.featured ? 'rgba(131,199,50,0.2)' : 'var(--border)'}` }}>{p.desc}</p>
         <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 13, flex: 1, marginBottom: 28 }}>
@@ -100,7 +100,7 @@ export default function Pricing() {
             <span style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 12, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--orange)' }}>Pricing / No Subscriptions</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 20, flexWrap: 'wrap', gap: 16 }}>
-            <h2 style={{ fontFamily: 'var(--font-display), MonumentExtended, sans-serif', fontSize: 'clamp(44px, 5.5vw, 72px)', lineHeight: 1.0, letterSpacing: 1, color: 'var(--text)' }}>
+            <h2 style={{ fontFamily: 'var(--font-heading), Michroma, sans-serif', fontWeight: 900, fontSize: 'clamp(32px, 4vw, 56px)', lineHeight: 1.0, letterSpacing: -1, color: 'var(--text)' }}>
               Pay for results. <span style={{ color: 'var(--orange)' }}>Own it forever.</span>
             </h2>
             <p style={{ fontFamily: 'var(--font-body), Degular, sans-serif', fontSize: 15, color: 'var(--text-muted)', maxWidth: 280, textAlign: 'right', lineHeight: 1.6 }}>No retainers. No monthly fees.<br />You pay for what we build.</p>
