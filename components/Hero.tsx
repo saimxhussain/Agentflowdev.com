@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 
 const TABS = [
   { id: 'b2b', label: 'B2B Lead Generator', tag: 'Lead Gen', src: 'https://res.cloudinary.com/dgh17nged/video/upload/q_auto/f_auto/v1776609526/B2B_Lead_Generator_ghhfmk.mp4' },
@@ -7,182 +7,42 @@ const TABS = [
 ]
 const TRUSTED = ['n8n', 'OpenAI', 'Apollo.io', 'HubSpot', 'LinkedIn', 'Make.com']
 
-// ─── WebGL Liquid Text Canvas ───────────────────────────────────────────────
+// ─── Static Glass / Transparent Text ────────────────────────────────────────
 function LiquidText() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const rafRef = useRef<number>(0)
-  const glRef = useRef<WebGLRenderingContext | null>(null)
-  const progRef = useRef<WebGLProgram | null>(null)
-  const timeRef = useRef(0)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false })
-    if (!gl) return
-    glRef.current = gl
-
-    // ── Vertex shader ──
-    const vert = `
-      attribute vec2 a_pos;
-      void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }
-    `
-
-    // ── Fragment shader — liquid/water morphism text ──
-    const frag = `
-      precision highp float;
-      uniform vec2  u_res;
-      uniform float u_time;
-      uniform sampler2D u_tex;
-
-      // hash / noise helpers
-      float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
-      float noise(vec2 p){
-        vec2 i=floor(p), f=fract(p);
-        f=f*f*(3.0-2.0*f);
-        return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),
-                   mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);
-      }
-      float fbm(vec2 p){
-        float v=0.0,a=0.5;
-        for(int i=0;i<5;i++){v+=a*noise(p);p*=2.1;a*=0.5;}
-        return v;
-      }
-
-      void main(){
-        vec2 uv = gl_FragCoord.xy / u_res;
-        uv.y = 1.0 - uv.y;
-
-        float t = u_time * 0.35;
-
-        // Liquid displacement — two layers of fbm
-        vec2 q = vec2(fbm(uv + t*0.4), fbm(uv + vec2(1.7,9.2) + t*0.3));
-        vec2 r = vec2(fbm(uv + 4.0*q + vec2(1.7,9.2) + t*0.15),
-                      fbm(uv + 4.0*q + vec2(8.3,2.8) + t*0.2));
-        float f = fbm(uv + 4.0*r);
-
-        // Distort UV for text sampling
-        vec2 distort = uv + 0.018 * vec2(
-          sin(t*1.3 + uv.y*8.0 + f*6.0) + fbm(uv*3.0+t)*0.6,
-          cos(t*1.1 + uv.x*6.0 + f*5.0) + fbm(uv*3.0+t+1.5)*0.6
-        );
-
-        vec4 textSample = texture2D(u_tex, distort);
-
-        // Caustic light shimmer inside text
-        float caustic = fbm(uv * 5.0 + t * 0.8) * fbm(uv * 3.0 - t * 0.5);
-        caustic = pow(caustic, 1.5) * 2.5;
-
-        // Colour blend: teal base + lime accent + white shimmer
-        vec3 col = mix(
-          vec3(0.08, 0.22, 0.22),   // deep teal
-          vec3(0.51, 0.78, 0.20),   // lime #83C732
-          f * 0.7 + 0.2
-        );
-        col += caustic * vec3(0.9, 1.0, 0.85) * 0.35;
-        col = mix(col, vec3(0.85,0.95,0.80), caustic * 0.25);
-
-        // Edge fresnel — brighter rim
-        float rim = 1.0 - clamp(length((uv - 0.5)*1.8), 0.0, 1.0);
-        col += rim * 0.12 * vec3(0.6, 1.0, 0.5);
-
-        // Apply text mask — only show effect where text pixels exist
-        float mask = textSample.a;
-        // Soft inner glow
-        vec3 glowCol = col + vec3(0.3,0.5,0.2) * caustic;
-
-        gl_FragColor = vec4(glowCol, mask * (0.88 + caustic * 0.12));
-      }
-    `
-
-    const compile = (type: number, src: string) => {
-      const s = gl.createShader(type)!
-      gl.shaderSource(s, src); gl.compileShader(s)
-      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s))
-      return s
-    }
-    const prog = gl.createProgram()!
-    gl.attachShader(prog, compile(gl.VERTEX_SHADER, vert))
-    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, frag))
-    gl.linkProgram(prog)
-    progRef.current = prog
-    gl.useProgram(prog)
-
-    // Full-screen quad
-    const buf = gl.createBuffer()
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf)
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW)
-    const loc = gl.getAttribLocation(prog, 'a_pos')
-    gl.enableVertexAttribArray(loc)
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0)
-
-    // Draw text onto offscreen 2D canvas → upload as WebGL texture
-    const buildTexture = () => {
-      const W = canvas.width, H = canvas.height
-      const off = document.createElement('canvas')
-      off.width = W; off.height = H
-      const ctx = off.getContext('2d')!
-      ctx.clearRect(0, 0, W, H)
-
-      // Font size that fills the width
-      const fs = Math.min(W * 0.145, H * 0.55)
-      ctx.font = `800 ${fs}px MonumentExtended, sans-serif`
-      ctx.textAlign = 'center'
-      ctx.textBaseline = 'middle'
-      ctx.fillStyle = 'white'
-      ctx.fillText('AgentFlow', W / 2, H / 2)
-
-      const tex = gl.createTexture()!
-      gl.bindTexture(gl.TEXTURE_2D, tex)
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, off)
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
-      gl.uniform1i(gl.getUniformLocation(prog, 'u_tex'), 0)
-      return tex
-    }
-
-    const resize = () => {
-      const W = canvas.offsetWidth, H = canvas.offsetHeight
-      canvas.width = W * devicePixelRatio
-      canvas.height = H * devicePixelRatio
-      gl.viewport(0, 0, canvas.width, canvas.height)
-      buildTexture()
-    }
-    resize()
-    window.addEventListener('resize', resize)
-
-    // Render loop
-    const render = (ts: number) => {
-      timeRef.current = ts * 0.001
-      gl.useProgram(prog)
-      gl.uniform2f(gl.getUniformLocation(prog, 'u_res'), canvas.width, canvas.height)
-      gl.uniform1f(gl.getUniformLocation(prog, 'u_time'), timeRef.current)
-      gl.enable(gl.BLEND)
-      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
-      gl.clearColor(0, 0, 0, 0)
-      gl.clear(gl.COLOR_BUFFER_BIT)
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
-      rafRef.current = requestAnimationFrame(render)
-    }
-    rafRef.current = requestAnimationFrame(render)
-
-    return () => {
-      cancelAnimationFrame(rafRef.current)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
-
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        width: '100%',
-        height: 'clamp(140px, 22vw, 280px)',
+    <div style={{
+      width: '100%',
+      height: 'clamp(100px, 18vw, 240px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      pointerEvents: 'none',
+      position: 'relative',
+    }}>
+      <span style={{
+        fontFamily: 'var(--font-display), MonumentExtended, sans-serif',
+        fontWeight: 800,
+        fontSize: 'clamp(52px, 13vw, 172px)',
+        letterSpacing: '-0.03em',
+        lineHeight: 1,
         display: 'block',
-        pointerEvents: 'none',
-      }}
-    />
+        color: 'transparent',
+        WebkitTextStroke: '1.5px rgba(255,255,255,0.18)',
+        textShadow: `
+          0 0 80px rgba(131,199,50,0.25),
+          0 2px 0 rgba(255,255,255,0.06),
+          inset 0 0 40px rgba(131,199,50,0.1)
+        `,
+        background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(131,199,50,0.08) 40%, rgba(255,255,255,0.04) 100%)',
+        WebkitBackgroundClip: 'text',
+        backgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        filter: 'drop-shadow(0 0 32px rgba(131,199,50,0.18))',
+        userSelect: 'none',
+      }}>
+        AgentFlow
+      </span>
+    </div>
   )
 }
 
@@ -215,7 +75,7 @@ export default function Hero() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }} />
-      {/* Subtle dark vignette so text stays readable */}
+      {/* Subtle dark vignette */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,
         background: 'radial-gradient(ellipse 120% 100% at 50% 50%, rgba(31,48,55,0.45) 0%, rgba(31,48,55,0.75) 100%)',
@@ -235,7 +95,7 @@ export default function Hero() {
         boxShadow: '0 8px 48px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.15)',
       }}>
 
-        {/* Top row: tagline left, CTA right */}
+        {/* Top row */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8, flexWrap: 'wrap', gap: 16 }}>
           <p style={{ fontFamily: 'var(--font-body),Degular,sans-serif', fontSize: 15, fontWeight: 500, color: 'rgba(245,240,234,0.7)', margin: 0, maxWidth: 480, lineHeight: 1.6 }}>
             The leading AI automation agency —<br />built for the future of intelligent workflows.
@@ -257,7 +117,7 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* WebGL liquid text */}
+        {/* Transparent glass text */}
         <LiquidText />
 
         {/* Subtitle */}
@@ -267,7 +127,7 @@ export default function Hero() {
           <br />AI systems running 24/7, without your team lifting a finger.
         </p>
 
-        {/* 3 pill buttons */}
+        {/* Pill buttons */}
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 44 }}>
           {[
             { label: 'Book a Free Consultation', href: 'https://cal.com/saim-hussain-9ekrz6', primary: true },
