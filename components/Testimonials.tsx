@@ -111,7 +111,7 @@ export default function Testimonials() {
                 flexShrink: 0,
               }}>
                 {/* Photo */}
-                <div style={{ position: 'relative', width: '100%', aspectRatio: "3/4", overflow: 'hidden' }}>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: "3/1", overflow: 'hidden' }}>
                   <Image
                     src={card.src}
                     alt={card.name}
