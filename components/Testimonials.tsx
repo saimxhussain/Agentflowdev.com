@@ -1,7 +1,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import Image from 'next/image'
- 
+
 const cards = [
   {
     src: '/images/test_1.png',
@@ -49,29 +49,29 @@ const cards = [
     accent: '#83C732',
   },
 ]
- 
+
 export default function Testimonials() {
   const [offset, setOffset] = useState(0)
   const touchStartX = useRef(0)
   const visible = 3
   const max = cards.length - visible
- 
+
   const prev = () => setOffset(o => Math.max(0, o - 1))
   const next = () => setOffset(o => Math.min(max, o + 1))
- 
+
   const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX }
   const handleTouchEnd = (e: React.TouchEvent) => {
     const delta = touchStartX.current - e.changedTouches[0].clientX
     if (delta > 40) next()
     if (delta < -40) prev()
   }
- 
+
   return (
     <section style={{ padding: '120px 0', background: 'var(--bg)', borderBottom: '1px solid var(--section-line)', position: 'relative', overflow: 'hidden' }}>
       <div className="orb" style={{ width: 500, height: 500, background: 'rgba(131,199,50,0.06)', top: -100, right: -100, animation: 'orbMove 20s ease-in-out infinite' }} />
- 
+
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 32px', position: 'relative', zIndex: 1 }}>
- 
+
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
           <span style={{ width: 28, height: 3, background: 'var(--orange)', borderRadius: 2 }} />
@@ -90,7 +90,7 @@ export default function Testimonials() {
             </button>
           </div>
         </div>
- 
+
         {/* Cards slider */}
         <div style={{ overflow: 'hidden' }} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
           <div style={{
@@ -111,7 +111,7 @@ export default function Testimonials() {
                 flexShrink: 0,
               }}>
                 {/* Photo */}
-                <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', overflow: 'hidden' }}>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: "1/1", overflow: 'hidden' }}>
                   <Image
                     src={card.src}
                     alt={card.name}
@@ -124,10 +124,10 @@ export default function Testimonials() {
                   <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to top, ${card.color2}ee 0%, transparent 50%)`, mixBlendMode: 'multiply' }} />
                   <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(to top, ${card.color1} 0%, transparent 60%)` }} />
                 </div>
- 
+
                 {/* Quote */}
-                <div style={{ padding: '20px 24px 28px' }}>
-                  <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.88)', fontStyle: 'italic', margin: '0 0 20px' }}>
+                <div style={{ padding: "14px 18px 20px" }}>
+                  <p style={{ fontSize: 13, lineHeight: 1.75, color: 'rgba(255,255,255,0.88)', fontStyle: 'italic', margin: '0 0 12px' }}>
                     {card.review}
                   </p>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, borderTop: `1px solid ${card.accent}33`, paddingTop: 16 }}>
@@ -140,14 +140,14 @@ export default function Testimonials() {
                     </div>
                   </div>
                 </div>
- 
+
                 {/* hover glow */}
                 <div className="t-card-glow" style={{ position: 'absolute', inset: 0, borderRadius: 20, border: `1px solid ${card.accent}`, opacity: 0, transition: 'opacity 0.3s ease', pointerEvents: 'none' }} />
               </div>
             ))}
           </div>
         </div>
- 
+
         {/* Dots */}
         <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 40 }}>
           {Array.from({ length: max + 1 }).map((_, i) => (
@@ -160,7 +160,7 @@ export default function Testimonials() {
           ))}
         </div>
       </div>
- 
+
       <style>{`
         .t-nav-btn {
           width: 52px; height: 52px; border-radius: 12px;
