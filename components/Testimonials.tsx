@@ -101,7 +101,7 @@ export default function Testimonials() {
           }}>
             {cards.map((card, i) => (
               <div key={i} className="t-card" style={{
-                minWidth: 'calc(28% - 14px)',
+                minWidth: 'calc(18% - 14px)',
                 borderRadius: 20,
                 overflow: 'hidden',
                 position: 'relative',
@@ -111,7 +111,7 @@ export default function Testimonials() {
                 flexShrink: 0,
               }}>
                 {/* Photo */}
-                <div style={{ position: 'relative', width: '100%', aspectRatio: "3/1", overflow: 'hidden' }}>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: "3/4", overflow: 'hidden' }}>
                   <Image
                     src={card.src}
                     alt={card.name}
